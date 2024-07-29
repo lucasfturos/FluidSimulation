@@ -40,18 +40,22 @@ void FluidSimulation::fadeDensity() {
     }
 }
 
-void FluidSimulation::applyCircleCollision(int cx, int cy, int radius) {
-    for (int j = cy - radius; j <= cy + radius; ++j) {
-        for (int i = cx - radius; i <= cx + radius; ++i) {
-            if (i >= 0 && i < N && j >= 0 && j < N) {
-                int dx = i - cx;
-                int dy = j - cy;
-                if ((dx * dx + dy * dy) <= (radius * radius)) {
-                    Vx[IX(i, j)] = 0.0f;
-                    Vy[IX(i, j)] = 0.0f;
-                    Vx0[IX(i, j)] = 0.0f;
-                    Vy0[IX(i, j)] = 0.0f;
-                }
+void FluidSimulation::updateCircleCollision(int cx, int cy, int radius) {
+    int startX = std::max(0, cx - radius);
+    int endX = std::min(N - 1, cx + radius);
+    int startY = std::max(0, cy - radius);
+    int endY = std::min(N - 1, cy + radius);
+
+    for (int j = startY; j <= endY; ++j) {
+        for (int i = startX; i <= endX; ++i) {
+            int dx = i - cx;
+            int dy = j - cy;
+            if ((dx * dx + dy * dy) <= radius - 1) {
+                int index = IX(i, j);
+                Vx[index] = 0.0f;
+                Vy[index] = 0.0f;
+                Vx0[index] = 0.0f;
+                Vy0[index] = 0.0f;
             }
         }
     }

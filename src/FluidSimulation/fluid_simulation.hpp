@@ -42,11 +42,11 @@ class FluidSimulation {
     void addDensity(int, int, float);
     void addVelocity(int, int, float, float);
     void addTurbulence(int, int, float, float, float);
-    void applyCircleCollision(int, int, int);
+    void updateCircleCollision(int, int, int);
     void fadeDensity();
 
     // Draw
-    void drawCircle(int, int, int);
+    void drawCircle(int, int, int, Uint32);
     void drawLine(int, int, int, int, Uint32);
 
     void drawDensity();
