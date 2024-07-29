@@ -19,7 +19,7 @@ class FluidSimulation {
     const int N = 270;
     const int nSize = N * N;
     const int iter = 16;
-    const int SCALE = 4;
+    const int SCALE = 15;
 
   private:
     SDL_Surface *surface;

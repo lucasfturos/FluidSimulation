@@ -50,7 +50,7 @@ void FluidSimulation::updateCircleCollision(int cx, int cy, int radius) {
         for (int i = startX; i <= endX; ++i) {
             int dx = i - cx;
             int dy = j - cy;
-            if ((dx * dx + dy * dy) <= radius - 1) {
+            if ((dx * dx + dy * dy) <= radius + 1) {
                 int index = IX(i, j);
                 Vx[index] = 0.0f;
                 Vy[index] = 0.0f;

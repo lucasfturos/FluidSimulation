@@ -23,8 +23,8 @@ void FluidSimulation::loadParams() {
     Json::Value root;
     file >> root;
     params = {
-        .diffusion = root.get("diffusion", 0.2).asFloat(),
-        .viscosity = root.get("viscosity", 0.0).asFloat(),
-        .dt = root.get("dt", 0.0000001).asFloat(),
+        .diffusion = root.get("diffusion", 1.0e-5).asFloat(),
+        .viscosity = root.get("viscosity", 1.0e-6).asFloat(),
+        .dt = root.get("dt", 0.01).asFloat(),
     };
 }
