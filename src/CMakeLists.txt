@@ -16,10 +16,16 @@ set(SRC_SOURCE
 )
 
 find_package(PkgConfig REQUIRED)
+find_package(SDL2 REQUIRED)
+
 pkg_check_modules(JSONCPP jsoncpp)
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
+include_directories(
+    ${SDL2_INCLUDE_DIRS}
+    ${JSONCPP_INCLUDE_DIRS}
+)
+
+link_directories(${JSONCPP_LIBRARY_DIRS})
 
 add_executable(${PROJECT_NAME} 
     ${SRC_HEADER} 
@@ -27,11 +33,6 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME}
-    PRIVATE ${JSONCPP_LIBRARIES}
-    PRIVATE ${SDL2_LIBRARIES}
-)
-
-target_include_directories(${PROJECT_NAME}
     PRIVATE ${JSONCPP_LIBRARIES}
     PRIVATE ${SDL2_LIBRARIES}
 )

@@ -1,5 +1,4 @@
 #include "render.hpp"
-#include <stdexcept>
 
 void Render::setupWindow() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)

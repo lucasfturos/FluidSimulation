@@ -17,6 +17,7 @@ Detalhes logo abaixo com os requisitos e instruções
 -   Make
 -   SDL2
 -   Vulkan
+-   Jsoncpp
 
 ### Instruções:
 
