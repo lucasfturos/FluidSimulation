@@ -28,10 +28,20 @@ void FluidSimulation::addVelocity(int x, int y, float amountX, float amountY) {
 void FluidSimulation::addTurbulence(int x, int y, float t, float amountX,
                                     float amountY) {
     int index = IX(x, y);
-    Vx[index] +=
-        amountX * (1.0f + 0.1f * perlin->noise({static_cast<float>(x), t}));
-    Vy[index] +=
-        amountY * (1.0f + 0.1f * perlin->noise({static_cast<float>(y), t}));
+    float noiseScale = 0.9f;
+    float noiseWeight = 0.9f;
+    float turbulenceStrength = 0.9f;
+
+    float nx = static_cast<float>(x) * noiseScale;
+    float ny = static_cast<float>(y) * noiseScale;
+
+    float noiseValueX =
+        perlin->noise({nx, t}) + noiseWeight * perlin->noise({2 * nx, 2 * t});
+    float noiseValueY =
+        perlin->noise({ny, t}) + noiseWeight * perlin->noise({2 * ny, 2 * t});
+
+    Vx[index] += amountX * (1.0f + turbulenceStrength * noiseValueX);
+    Vy[index] += amountY * (1.0f + turbulenceStrength * noiseValueY);
 }
 
 void FluidSimulation::fadeDensity() {
@@ -40,7 +50,8 @@ void FluidSimulation::fadeDensity() {
     }
 }
 
-void FluidSimulation::updateCircleCollision(int cx, int cy, int radius) {
+void FluidSimulation::updateCircleCollision(int cx, int cy, int radius,
+                                            float friction) {
     int startX = std::max(0, cx - radius);
     int endX = std::min(N - 1, cx + radius);
     int startY = std::max(0, cy - radius);
@@ -50,12 +61,31 @@ void FluidSimulation::updateCircleCollision(int cx, int cy, int radius) {
         for (int i = startX; i <= endX; ++i) {
             int dx = i - cx;
             int dy = j - cy;
-            if ((dx * dx + dy * dy) <= radius + 1) {
+            if ((dx * dx + dy * dy) <= ((radius * radius) / SCALE)) {
                 int index = IX(i, j);
-                Vx[index] = 0.0f;
-                Vy[index] = 0.0f;
-                Vx0[index] = 0.0f;
-                Vy0[index] = 0.0f;
+                float length = std::sqrt(dx * dx + dy * dy);
+                if (length > 0) {
+                    float nx = dx / length;
+                    float ny = dy / length;
+
+                    float dotProduct = Vx[index] * nx + Vy[index] * ny;
+                    float tx = Vx[index] - dotProduct * nx;
+                    float ty = Vy[index] - dotProduct * ny;
+
+                    tx *= friction;
+                    ty *= friction;
+
+                    Vx[index] = tx;
+                    Vy[index] = ty;
+
+                    Vx0[index] = tx;
+                    Vy0[index] = ty;
+                } else {
+                    Vx[index] = 0.0f;
+                    Vy[index] = 0.0f;
+                    Vx0[index] = 0.0f;
+                    Vy0[index] = 0.0f;
+                }
             }
         }
     }

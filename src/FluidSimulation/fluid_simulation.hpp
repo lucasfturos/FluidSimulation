@@ -19,7 +19,7 @@ class FluidSimulation {
     const int N = 270;
     const int nSize = N * N;
     const int iter = 16;
-    const int SCALE = 15;
+    const int SCALE = 10;
 
   private:
     SDL_Surface *surface;
@@ -42,15 +42,12 @@ class FluidSimulation {
     void addDensity(int, int, float);
     void addVelocity(int, int, float, float);
     void addTurbulence(int, int, float, float, float);
-    void updateCircleCollision(int, int, int);
+    void updateCircleCollision(int, int, int, float = 1.0f);
     void fadeDensity();
 
     // Draw
     void drawCircle(int, int, int, Uint32);
-    void drawLine(int, int, int, int, Uint32);
-
     void drawDensity();
-    void drawVelocity();
 
     // Util
     int IX(int, int);
