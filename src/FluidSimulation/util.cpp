@@ -147,6 +147,7 @@ void FluidSimulation::advect(int b, std::vector<float> &d,
  */
 void FluidSimulation::linSolve(int b, std::vector<float> &x,
                                const std::vector<float> &x0, float a, float c) {
+    int iter = params.iter;
     float cRecip = 1.0f / c;
     for (int t = 0; t < iter; t++) {
         for (int j = 1; j < N - 1; j++) {

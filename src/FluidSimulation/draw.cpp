@@ -23,16 +23,17 @@ void FluidSimulation::drawCircle(int cx, int cy, int radius, Uint32 color) {
 void FluidSimulation::drawDensity() {
     int width = surface->w;
     int height = surface->h;
+    int scale = params.scale;
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            int x = i * SCALE;
-            int y = j * SCALE;
+            int x = i * scale;
+            int y = j * scale;
             Uint8 opacity = density[IX(i, j)];
             Uint32 color = getColorByValue(std::fmod((opacity + 50), 255.0f),
                                            200 / 255.0f, opacity / 255.0f);
             if (x >= 0 && x < width && y >= 0 && y < height) {
-                SDL_Rect rect = {x, y, SCALE, SCALE};
+                SDL_Rect rect = {x, y, scale, scale};
                 SDL_FillRect(surface, &rect, color);
             }
         }
@@ -46,9 +47,10 @@ void FluidSimulation::draw() {
 
     int width = surface->w;
     int height = surface->h;
+    int scale = params.scale;
 
-    int cx = static_cast<int>(width * 0.1 / SCALE);
-    int cy = static_cast<int>(height * 0.5 / SCALE);
+    int cx = static_cast<int>(width * 0.1 / scale);
+    int cy = static_cast<int>(height * 0.5 / scale);
 
     int radius = 10;
     int collisionX = cx + 30;
@@ -75,7 +77,7 @@ void FluidSimulation::draw() {
     drawDensity();
 
     Uint32 fillColor = SDL_MapRGB(surface->format, 255, 0, 0);
-    drawCircle(collisionX * SCALE, collisionY * SCALE, radius, fillColor);
+    drawCircle(collisionX * scale, collisionY * scale, radius, fillColor);
 
     fadeDensity();
 }

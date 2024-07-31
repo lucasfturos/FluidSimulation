@@ -56,12 +56,13 @@ void FluidSimulation::updateCircleCollision(int cx, int cy, int radius,
     int endX = std::min(N - 1, cx + radius);
     int startY = std::max(0, cy - radius);
     int endY = std::min(N - 1, cy + radius);
+    int scale = params.scale;
 
     for (int j = startY; j <= endY; ++j) {
         for (int i = startX; i <= endX; ++i) {
             int dx = i - cx;
             int dy = j - cy;
-            if ((dx * dx + dy * dy) <= ((radius * radius) / SCALE)) {
+            if ((dx * dx + dy * dy) <= ((radius * radius) / scale)) {
                 int index = IX(i, j);
                 float length = std::sqrt(dx * dx + dy * dy);
                 if (length > 0) {

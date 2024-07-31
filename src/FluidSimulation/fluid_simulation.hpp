@@ -11,6 +11,8 @@
 class FluidSimulation {
   protected:
     struct SimulationParameters {
+        int iter;
+        int scale;
         float diffusion;
         float viscosity;
         float dt;
@@ -18,8 +20,6 @@ class FluidSimulation {
 
     const int N = 270;
     const int nSize = N * N;
-    const int iter = 16;
-    const int SCALE = 10;
 
   private:
     SDL_Surface *surface;
