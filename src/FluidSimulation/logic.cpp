@@ -1,17 +1,21 @@
 #include "fluid_simulation.hpp"
 
 void FluidSimulation::step() {
-    diffuse(1, Vx0, Vx, params.viscosity, params.dt);
-    diffuse(2, Vy0, Vy, params.viscosity, params.dt);
+    float dt = params.dt;
+    float viscosity = params.viscosity;
+    float diffusion = params.diffusion;
+
+    diffuse(1, Vx0, Vx, viscosity, dt);
+    diffuse(2, Vy0, Vy, viscosity, dt);
 
     project(Vx0, Vy0, Vx, Vy);
 
-    advect(1, Vx, Vx0, Vx0, Vy0, params.dt);
-    advect(2, Vy, Vy0, Vx0, Vy0, params.dt);
+    advect(1, Vx, Vx0, Vx0, Vy0, dt);
+    advect(2, Vy, Vy0, Vx0, Vy0, dt);
 
     project(Vx, Vy, Vx0, Vy0);
-    diffuse(0, s, density, params.diffusion, params.dt);
-    advect(0, density, s, Vx, Vy, params.dt);
+    diffuse(0, s, density, diffusion, dt);
+    advect(0, density, s, Vx, Vy, dt);
 }
 
 void FluidSimulation::addDensity(int x, int y, float amount) {

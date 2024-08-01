@@ -59,13 +59,13 @@ void FluidSimulation::draw() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(50.0f, 250.0f);
+    std::uniform_int_distribution<> dis(50.0f, 350.0f);
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 6; ++i) {
         addDensity(cx, cy, dis(gen));
     }
 
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 6; ++i) {
         float angle = 2 * M_PI;
         float vX = std::cos(angle) * 0.1f;
         float vY = std::sin(angle) * 0.1f;
