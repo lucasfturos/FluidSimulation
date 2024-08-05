@@ -7,11 +7,8 @@
  * Returns the index for a given (x, y) pair
  */
 int FluidSimulation::IX(int x, int y) {
-    (x >= N) ? x = N - 1 : 0;
-    (x <= 0) ? x = 0 : 0;
-    (y >= N) ? y = N - 1 : 0;
-    (y <= 0) ? y = 0 : 0;
-
+    x = std::clamp(x, 0, N - 1);
+    y = std::clamp(y, 0, N - 1);
     return x + y * N;
 }
 
