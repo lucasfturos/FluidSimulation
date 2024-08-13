@@ -1,7 +1,7 @@
 #include "../Common/util.hpp"
-#include "fluid_simulation.hpp"
+#include "fluid.hpp"
 
-void FluidSimulation::drawCircle(int cx, int cy, int radius, Uint32 color) {
+void Fluid::drawCircle(int cx, int cy, int radius, Uint32 color) {
     int width = surface->w;
     int height = surface->h;
 
@@ -20,7 +20,7 @@ void FluidSimulation::drawCircle(int cx, int cy, int radius, Uint32 color) {
     }
 }
 
-void FluidSimulation::drawDensity() {
+void Fluid::drawDensity() {
     int width = surface->w;
     int height = surface->h;
     int scale = params.scale;
@@ -40,7 +40,7 @@ void FluidSimulation::drawDensity() {
     }
 }
 
-void FluidSimulation::draw() {
+void Fluid::draw() {
     static float t = 0;
     std::fill(pixels, pixels + nSize, SDL_MapRGB(surface->format, 0, 0, 0));
     step();

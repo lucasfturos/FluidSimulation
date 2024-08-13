@@ -2,10 +2,10 @@
 
 Render::Render()
     : window(nullptr), renderer(nullptr), texture(nullptr), surface(nullptr),
-      quit(false), fluidSimulation(std::make_shared<FluidSimulation>()) {
+      quit(false), fluid(std::make_shared<Fluid>()) {
     setupWindow();
-    fluidSimulation->setSurface(surface);
-    fluidSimulation->setFilename("../simulation_params.json");
+    fluid->setSurface(surface);
+    fluid->setFilename("../simulation_params.json");
 }
 
 Render::~Render() { destroyWindow(); }
@@ -34,7 +34,7 @@ void Render::draw() {
     if (SDL_LockSurface(surface) == 0) {
         SDL_memset(surface->pixels, 0, surface->h * surface->pitch);
 
-        fluidSimulation->draw();
+        fluid->draw();
 
         SDL_UnlockSurface(surface);
         SDL_UpdateTexture(texture, nullptr, surface->pixels, surface->pitch);

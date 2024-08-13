@@ -1,6 +1,6 @@
-#include "fluid_simulation.hpp"
+#include "fluid.hpp"
 
-void FluidSimulation::step() {
+void Fluid::step() {
     float dt = params.dt;
     float viscosity = params.viscosity;
     float diffusion = params.diffusion;
@@ -18,18 +18,18 @@ void FluidSimulation::step() {
     advect(0, density, s, Vx, Vy, dt);
 }
 
-void FluidSimulation::addDensity(int x, int y, float amount) {
+void Fluid::addDensity(int x, int y, float amount) {
     int index = IX(x, y);
     density[index] += amount;
 }
 
-void FluidSimulation::addVelocity(int x, int y, float amountX, float amountY) {
+void Fluid::addVelocity(int x, int y, float amountX, float amountY) {
     int index = IX(x, y);
     Vx[index] += amountX;
     Vy[index] += amountY;
 }
 
-void FluidSimulation::addTurbulence(int x, int y, float t, float amountX,
+void Fluid::addTurbulence(int x, int y, float t, float amountX,
                                     float amountY) {
     int index = IX(x, y);
     float noiseScale = 0.9f;
@@ -48,13 +48,13 @@ void FluidSimulation::addTurbulence(int x, int y, float t, float amountX,
     Vy[index] += amountY * (1.0f + turbulenceStrength * noiseValueY);
 }
 
-void FluidSimulation::fadeDensity() {
+void Fluid::fadeDensity() {
     for (std::size_t i = 0; i < density.size(); ++i) {
         density[i] = std::max(density[i] - 0.02f, 0.0f);
     }
 }
 
-void FluidSimulation::updateCircleCollision(int cx, int cy, int radius,
+void Fluid::updateCircleCollision(int cx, int cy, int radius,
                                             float friction) {
     int startX = std::max(0, cx - radius);
     int endX = std::min(N - 1, cx + radius);

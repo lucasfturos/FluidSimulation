@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../FluidSimulation/fluid_simulation.hpp"
+#include "../Fluid/fluid.hpp"
 #include <SDL2/SDL.h>
 #include <memory>
 #include <string>
@@ -20,7 +20,7 @@ class Render {
     SDL_Surface *surface;
 
     bool quit;
-    std::shared_ptr<FluidSimulation> fluidSimulation;
+    std::shared_ptr<Fluid> fluid;
 
   private:
     Uint32 frameStart;

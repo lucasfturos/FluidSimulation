@@ -1,4 +1,4 @@
-#include "fluid_simulation.hpp"
+#include "fluid.hpp"
 
 /**
  * Function of indexing the 1D array
@@ -6,7 +6,7 @@
  * - y : int
  * Returns the index for a given (x, y) pair
  */
-int FluidSimulation::IX(int x, int y) {
+int Fluid::IX(int x, int y) {
     x = std::clamp(x, 0, N - 1);
     y = std::clamp(y, 0, N - 1);
     return x + y * N;
@@ -17,7 +17,7 @@ int FluidSimulation::IX(int x, int y) {
  * - b : int
  * - x : std::vector<float> &
  */
-void FluidSimulation::setBND(int b, std::vector<float> &x) {
+void Fluid::setBND(int b, std::vector<float> &x) {
     for (int i = 1; i < N - 1; i++) {
         x[IX(i, 0)] = b == 2 ? -x[IX(i, 1)] : x[IX(i, 1)];
         x[IX(i, N - 1)] = b == 2 ? -x[IX(i, N - 2)] : x[IX(i, N - 2)];
@@ -41,7 +41,7 @@ void FluidSimulation::setBND(int b, std::vector<float> &x) {
  * - p : std::vector<float> &
  * - div : std::vector<float> &
  */
-void FluidSimulation::project(std::vector<float> &velocX,
+void Fluid::project(std::vector<float> &velocX,
                               std::vector<float> &velocY, std::vector<float> &p,
                               std::vector<float> &div) {
     for (int j = 1; j < N - 1; ++j) {
@@ -78,7 +78,7 @@ void FluidSimulation::project(std::vector<float> &velocX,
  * - velocY : const std::vector<float> &
  * - dt : float
  */
-void FluidSimulation::advect(int b, std::vector<float> &d,
+void Fluid::advect(int b, std::vector<float> &d,
                              const std::vector<float> &d0,
                              const std::vector<float> &velocX,
                              const std::vector<float> &velocY, float dt) {
@@ -142,7 +142,7 @@ void FluidSimulation::advect(int b, std::vector<float> &d,
  * - a : float
  * - c : float
  */
-void FluidSimulation::linSolve(int b, std::vector<float> &x,
+void Fluid::linSolve(int b, std::vector<float> &x,
                                const std::vector<float> &x0, float a, float c) {
     int iter = params.iter;
     float cRecip = 1.0f / c;
@@ -167,7 +167,7 @@ void FluidSimulation::linSolve(int b, std::vector<float> &x,
  * - diff : float
  * - dt : float
  */
-void FluidSimulation::diffuse(int b, std::vector<float> &x,
+void Fluid::diffuse(int b, std::vector<float> &x,
                               const std::vector<float> &x0, float diff,
                               float dt) {
     float a = dt * diff * (N - 2) * (N - 2);

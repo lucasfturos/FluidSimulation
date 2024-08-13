@@ -8,7 +8,7 @@
 #include <memory>
 #include <vector>
 
-class FluidSimulation {
+class Fluid {
   protected:
     struct SimulationParameters {
         int iter;
@@ -62,7 +62,7 @@ class FluidSimulation {
                  float);
 
   public:
-    FluidSimulation();
+    Fluid();
 
     void setSurface(SDL_Surface *);
     void setFilename(const std::string &);

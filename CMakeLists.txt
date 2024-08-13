@@ -26,6 +26,7 @@ add_compile_options(
     -Wall -Wextra -Wpedantic -Werror -pedantic -g -Ofast 
 )
 
+add_subdirectory(external)
 add_subdirectory(src)
 
 # -------------------------------------------------------------------

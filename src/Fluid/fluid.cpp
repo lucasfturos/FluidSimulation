@@ -1,21 +1,21 @@
-#include "fluid_simulation.hpp"
+#include "fluid.hpp"
 
-FluidSimulation::FluidSimulation()
+Fluid::Fluid()
     : surface(nullptr), pixels(nullptr), perlin(std::make_shared<Perlin>()),
       s(nSize, 0.0f), density(nSize, 0.0f), Vx(nSize, 0.0f), Vy(nSize, 0.0f),
       Vx0(nSize, 0.0f), Vy0(nSize, 0.0f) {}
 
-void FluidSimulation::setSurface(SDL_Surface *renderSurface) {
+void Fluid::setSurface(SDL_Surface *renderSurface) {
     surface = renderSurface;
     pixels = static_cast<Uint32 *>(renderSurface->pixels);
 }
 
-void FluidSimulation::setFilename(const std::string &filepath) {
+void Fluid::setFilename(const std::string &filepath) {
     filename = filepath;
     loadParams();
 }
 
-void FluidSimulation::loadParams() {
+void Fluid::loadParams() {
     std::ifstream file(filename, std::ifstream::binary);
     if (!file.is_open())
         throw std::runtime_error("Cannot open file: " + filename);
