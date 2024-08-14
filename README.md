@@ -2,7 +2,7 @@
 
 Este projeto implementa uma simulação de fluidos utilizando C++ e SDL2. A simulação baseia-se em um método de diferenças finitas para resolver as equações de Navier-Stokes, com ruído Perlin adicionado para gerar uma textura inicial e efeitos.
 
-Feito em C++ e SDL2.
+Feito em C++, ImGui e SDL2.
 
 ## Instalação
 
@@ -16,8 +16,6 @@ Detalhes logo abaixo com os requisitos e instruções
 -   GCC/G++
 -   Make
 -   SDL2
--   OpenGL
--   Jsoncpp
 
 ### Instruções:
 
