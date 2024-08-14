@@ -23,11 +23,14 @@ class Fluid {
     std::vector<float> density;
     std::vector<float> Vx, Vy;
     std::vector<float> Vx0, Vy0;
+    int mouseX, mouseY;
 
   private:
     SimulationParams params;
 
-    void loadParams();
+    void drawDensity();
+    void drawCircle(int, int, int, Uint32);
+    void applyFluidInteraction(int, int, int, float, float, float);
 
     // Logic
     void step();
@@ -36,10 +39,6 @@ class Fluid {
     void addTurbulence(int, int, float, float, float);
     void updateCircleCollision(int, int, int, float = 1.0f);
     void fadeDensity();
-
-    // Draw
-    void drawCircle(int, int, int, Uint32);
-    void drawDensity();
 
     // Util
     int IX(int, int);
@@ -57,6 +56,7 @@ class Fluid {
     Fluid();
 
     void setSurface(SDL_Surface *);
+    void setMousePos(int, int);
     void setSimulationParams(SimulationParams);
     void draw();
 };

@@ -61,4 +61,5 @@ struct SimulationParams {
     float diffusion;
     float viscosity;
     float dt;
+    bool enableMouse;
 };

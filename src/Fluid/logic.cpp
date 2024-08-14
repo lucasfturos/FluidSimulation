@@ -29,8 +29,7 @@ void Fluid::addVelocity(int x, int y, float amountX, float amountY) {
     Vy[index] += amountY;
 }
 
-void Fluid::addTurbulence(int x, int y, float t, float amountX,
-                                    float amountY) {
+void Fluid::addTurbulence(int x, int y, float t, float amountX, float amountY) {
     int index = IX(x, y);
     float noiseScale = 0.9f;
     float noiseWeight = 0.9f;
@@ -54,8 +53,7 @@ void Fluid::fadeDensity() {
     }
 }
 
-void Fluid::updateCircleCollision(int cx, int cy, int radius,
-                                            float friction) {
+void Fluid::updateCircleCollision(int cx, int cy, int radius, float friction) {
     int startX = std::max(0, cx - radius);
     int endX = std::min(N - 1, cx + radius);
     int startY = std::max(0, cy - radius);

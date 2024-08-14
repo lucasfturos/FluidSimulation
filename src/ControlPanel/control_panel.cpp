@@ -1,6 +1,7 @@
 #include "control_panel.hpp"
 
-ControlPanel::ControlPanel() : params({16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f}) {}
+ControlPanel::ControlPanel()
+    : params({16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, false}) {}
 
 SimulationParams ControlPanel::getSimulationParams() { return params; }
 
@@ -17,16 +18,19 @@ void ControlPanel::run() {
     ImGui::Separator();
 
     ImGui::Text("Simulation Parameters");
+
     ImGui::PushItemWidth(200);
     ImGui::InputInt("Iterations", &params.iter, 1, 30);
     ImGui::InputFloat("Diffusion", &params.diffusion, 0.0f, 0.0f, "%.1e");
     ImGui::InputFloat("Viscosity", &params.viscosity, 0.0f, 0.0f, "%.1e");
     ImGui::InputFloat("dt", &params.dt, 0.0f, 0.0f, "%.1e");
+    ImGui::Checkbox("Mouse Interaction", &params.enableMouse);
     ImGui::PopItemWidth();
+
     if (ImGui::Button("Reset")) {
-        params = {16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f};
+        params = {16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, false};
     }
-    
+
     ImGui::Separator();
 
     ImGui::End();

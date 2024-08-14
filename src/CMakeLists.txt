@@ -18,6 +18,7 @@ set(SRC_SOURCE
     Fluid/logic.cpp
     Fluid/util.cpp
     # Render
+    Render/event.cpp
     Render/render.cpp
     Render/setup.cpp
     # Main
