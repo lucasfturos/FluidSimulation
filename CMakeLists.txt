@@ -15,15 +15,15 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 20)
 
 set(RESOURCES_DIRECTORY 
-  "${CMAKE_SOURCE_DIR}/assets"
+    "${CMAKE_SOURCE_DIR}/assets"
 )
 
 file(COPY ${RESOURCES_DIRECTORY} 
-  DESTINATION ${CMAKE_BINARY_DIR}
+    DESTINATION ${CMAKE_BINARY_DIR}
 )
 
 add_compile_options(
-    -Wall -Wextra -Wpedantic -Werror -pedantic -g -Ofast 
+    -Wall -Wextra -Wpedantic -Werror -pedantic -g -O3 -ffast-math 
 )
 
 add_subdirectory(external)

@@ -3,9 +3,20 @@
 #include "../ControlPanel/control_panel.hpp"
 #include "../Fluid/fluid.hpp"
 
+#include "../../external/imgui/backends/imgui_impl_sdl2.h"
+#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
+
 #include <SDL2/SDL.h>
 #include <memory>
 #include <string>
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten/emscripten.h>
+#include <functional>
+
+static std::function<void()> loop;
+static void __attribute__((unused)) mainLoop() { loop(); }
+#endif
 
 class Render {
   protected:

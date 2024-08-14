@@ -1,5 +1,3 @@
-#include "../../external/imgui/backends/imgui_impl_sdl2.h"
-#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
 #include "render.hpp"
 
 void Render::setupImGui() {
@@ -9,13 +7,9 @@ void Render::setupImGui() {
     (void)io;
 
     ImGui::StyleColorsDark();
-    if (!ImGui_ImplSDL2_InitForSDLRenderer(window, renderer)) {
-        throw std::runtime_error(
-            "Failed to initialize ImplSDL2_InitForSDLRenderer.");
-    }
-    if (!ImGui_ImplSDLRenderer2_Init(renderer)) {
-        throw std::runtime_error("Failed to initialize ImplSDLRenderer2_Init.");
-    }
+
+    ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+    ImGui_ImplSDLRenderer2_Init(renderer);
 }
 
 void Render::setupWindow() {

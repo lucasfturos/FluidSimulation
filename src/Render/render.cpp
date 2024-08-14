@@ -1,6 +1,4 @@
 #include "render.hpp"
-#include "../../external/imgui/backends/imgui_impl_sdl2.h"
-#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
 
 Render::Render()
     : window(nullptr), renderer(nullptr), texture(nullptr), surface(nullptr),
@@ -39,7 +37,13 @@ void Render::draw() {
 void Render::run() {
     controlPanel->setup();
 
-    while (!quit) {
+#ifdef __EMSCRIPTEN__
+    loop =
+        [&]()
+#else
+    while (!quit)
+#endif
+    {
         frameStart = SDL_GetTicks();
         handleEvents();
         SDL_RenderClear(renderer);
@@ -51,5 +55,8 @@ void Render::run() {
         if (frameDelay > frameTime) {
             SDL_Delay(frameDelay - frameTime);
         }
-    }
+    };
+#if defined(__EMSCRIPTEN__)
+    emscripten_set_main_loop(mainLoop, 0, true);
+#endif
 }

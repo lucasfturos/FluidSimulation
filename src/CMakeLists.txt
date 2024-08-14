@@ -41,4 +41,22 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${SDL2_LIBRARIES}
 )
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    set(CMAKE_EXECUTABLE_SUFFIX ".html")
+    
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        -s USE_SDL=2
+    )
+    
+    target_link_options(${PROJECT_NAME} PRIVATE
+        "-s WASM=1"
+        "-s ALLOW_MEMORY_GROWTH=1"
+        "-s NO_EXIT_RUNTIME=0"
+        "-s ASSERTIONS=1"
+        --no-heap-copy 
+        --preload-file ${CMAKE_SOURCE_DIR}/assets/font@/assets/font
+        --shell-file ${CMAKE_SOURCE_DIR}/html/template.html
+    )
+endif()
+
 # -------------------------------------------------------------------
