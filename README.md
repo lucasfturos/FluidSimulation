@@ -16,6 +16,7 @@ Detalhes logo abaixo com os requisitos e instruções
 -   GCC/G++
 -   Make
 -   SDL2
+-   Emscripten
 
 ### Instruções:
 
