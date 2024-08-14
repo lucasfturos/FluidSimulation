@@ -1,6 +1,8 @@
 # -------------------------------------------------------------------
 
 set(SRC_HEADER
+    # ControlPanel
+    ControlPanel/control_panel.hpp
     # Fluid
     Fluid/fluid.hpp
     # Render
@@ -8,8 +10,10 @@ set(SRC_HEADER
 )
 
 set(SRC_SOURCE
+    # ControlPanel
+    ControlPanel/control_panel.cpp
+    ControlPanel/gui.cpp
     # Fluid
-    Fluid/draw.cpp
     Fluid/fluid.cpp
     Fluid/logic.cpp
     Fluid/util.cpp

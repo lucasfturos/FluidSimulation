@@ -1,6 +1,8 @@
 #pragma once
 
+#include "../ControlPanel/control_panel.hpp"
 #include "../Fluid/fluid.hpp"
+
 #include <SDL2/SDL.h>
 #include <memory>
 #include <string>
@@ -21,11 +23,14 @@ class Render {
 
     bool quit;
     std::shared_ptr<Fluid> fluid;
+    std::shared_ptr<ControlPanel> controlPanel;
 
   private:
     Uint32 frameStart;
     int frameTime;
 
+    // Setup
+    void setupImGui();
     void setupWindow();
     void destroyWindow();
 

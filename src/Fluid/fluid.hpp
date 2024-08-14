@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Common/perlin.hpp"
+#include "../Common/util.hpp"
 #include <SDL2/SDL.h>
 #include <algorithm>
 #include <fstream>
@@ -10,14 +11,6 @@
 
 class Fluid {
   protected:
-    struct SimulationParameters {
-        int iter;
-        int scale;
-        float diffusion;
-        float viscosity;
-        float dt;
-    };
-
     const int N = 270;
     const int nSize = N * N;
 
@@ -32,8 +25,7 @@ class Fluid {
     std::vector<float> Vx0, Vy0;
 
   private:
-    std::string filename;
-    SimulationParameters params;
+    SimulationParams params;
 
     void loadParams();
 
@@ -65,6 +57,6 @@ class Fluid {
     Fluid();
 
     void setSurface(SDL_Surface *);
-    void setFilename(const std::string &);
+    void setSimulationParams(SimulationParams);
     void draw();
 };

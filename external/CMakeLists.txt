@@ -8,6 +8,7 @@ set(EXTERNAL_HEADERS
     imgui/imstb_textedit.h
     imgui/imstb_truetype.h
     imgui/backends/imgui_impl_sdl2.h
+    imgui/backends/imgui_impl_sdlrenderer2.h
 )
 
 set(EXTERNAL_SOURCES
@@ -16,6 +17,7 @@ set(EXTERNAL_SOURCES
     imgui/imgui_widgets.cpp
     imgui/imgui_tables.cpp
     imgui/backends/imgui_impl_sdl2.cpp
+    imgui/backends/imgui_impl_sdlrenderer2.cpp
 )
 
 find_package(SDL2 REQUIRED)

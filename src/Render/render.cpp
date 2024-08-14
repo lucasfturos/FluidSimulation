@@ -1,11 +1,14 @@
 #include "render.hpp"
+#include "../../external/imgui/backends/imgui_impl_sdl2.h"
+#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
 
 Render::Render()
     : window(nullptr), renderer(nullptr), texture(nullptr), surface(nullptr),
-      quit(false), fluid(std::make_shared<Fluid>()) {
+      quit(false), fluid(std::make_shared<Fluid>()),
+      controlPanel(std::make_shared<ControlPanel>()) {
     setupWindow();
+    setupImGui();
     fluid->setSurface(surface);
-    fluid->setFilename("../simulation_params.json");
 }
 
 Render::~Render() { destroyWindow(); }
@@ -13,6 +16,7 @@ Render::~Render() { destroyWindow(); }
 void Render::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
         switch (event.type) {
         case SDL_QUIT:
             quit = true;
@@ -31,9 +35,16 @@ void Render::handleEvents() {
 }
 
 void Render::draw() {
+    ImGui_ImplSDLRenderer2_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
+
+    controlPanel->run();
+
     if (SDL_LockSurface(surface) == 0) {
         SDL_memset(surface->pixels, 0, surface->h * surface->pitch);
 
+        fluid->setSimulationParams(controlPanel->getSimulationParams());
         fluid->draw();
 
         SDL_UnlockSurface(surface);
@@ -41,9 +52,14 @@ void Render::draw() {
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, nullptr, nullptr);
     }
+
+    ImGui::Render();
+    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
 }
 
 void Render::run() {
+    controlPanel->setup();
+
     while (!quit) {
         frameStart = SDL_GetTicks();
         handleEvents();
@@ -57,5 +73,4 @@ void Render::run() {
             SDL_Delay(frameDelay - frameTime);
         }
     }
-    SDL_Quit();
 }

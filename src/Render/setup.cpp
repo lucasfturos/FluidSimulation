@@ -1,5 +1,24 @@
 #include "render.hpp"
 
+#include "../../external/imgui/backends/imgui_impl_sdl2.h"
+#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
+
+void Render::setupImGui() {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
+
+    ImGui::StyleColorsDark();
+    if (!ImGui_ImplSDL2_InitForSDLRenderer(window, renderer)) {
+        throw std::runtime_error(
+            "Failed to initialize ImplSDL2_InitForSDLRenderer.");
+    }
+    if (!ImGui_ImplSDLRenderer2_Init(renderer)) {
+        throw std::runtime_error("Failed to initialize ImplSDLRenderer2_Init.");
+    }
+}
+
 void Render::setupWindow() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
         throw std::runtime_error("Error initializing SDL: " +
@@ -8,7 +27,7 @@ void Render::setupWindow() {
     try {
         window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED,
                                   SDL_WINDOWPOS_UNDEFINED, screenWidth,
-                                  screenHeight, SDL_WINDOW_OPENGL);
+                                  screenHeight, SDL_WINDOW_SHOWN);
         if (!window)
             throw std::runtime_error("Error creating window: " +
                                      std::string(SDL_GetError()));
@@ -40,6 +59,10 @@ void Render::setupWindow() {
 }
 
 void Render::destroyWindow() {
+    ImGui_ImplSDLRenderer2_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
     if (texture) {
         SDL_DestroyTexture(texture);
         texture = nullptr;
@@ -56,5 +79,6 @@ void Render::destroyWindow() {
         SDL_DestroyWindow(window);
         window = nullptr;
     }
+
     SDL_Quit();
 }

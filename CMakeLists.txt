@@ -14,12 +14,12 @@ project(${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(JSON_FILE 
-    ${CMAKE_SOURCE_DIR}/simulation_params.json
+set(RESOURCES_DIRECTORY 
+  "${CMAKE_SOURCE_DIR}/assets"
 )
 
-file(COPY ${JSON_FILE}
-    DESTINATION ${CMAKE_BINARY_DIR}
+file(COPY ${RESOURCES_DIRECTORY} 
+  DESTINATION ${CMAKE_BINARY_DIR}
 )
 
 add_compile_options(

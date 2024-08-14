@@ -54,3 +54,11 @@ inline Uint32 getColorByValue(int value, float saturation = 0.8f,
 }
 
 inline float toRad(float angle) { return angle * M_PI / 180.0f; }
+
+struct SimulationParams {
+    int iter;
+    int scale;
+    float diffusion;
+    float viscosity;
+    float dt;
+};
