@@ -1,5 +1,9 @@
 # -------------------------------------------------------------------
 
+cmake_minimum_required(VERSION 3.4...3.25 FATAL_ERROR)
+
+# -------------------------------------------------------------------
+
 set(EXTERNAL_HEADERS
     imgui/imgui.h
     imgui/imconfig.h

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Common/perlin.hpp"
-#include "../Common/util.hpp"
+#include "Common/perlin.hpp"
+#include "Common/util.hpp"
 
 #include <SDL2/SDL.h>
 #include <algorithm>

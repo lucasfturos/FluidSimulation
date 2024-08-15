@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../ControlPanel/control_panel.hpp"
-#include "../Fluid/fluid.hpp"
+#include "ControlPanel/control_panel.hpp"
+#include "Fluid/fluid.hpp"
 
-#include "../../external/imgui/backends/imgui_impl_sdl2.h"
-#include "../../external/imgui/backends/imgui_impl_sdlrenderer2.h"
+#include "imgui_impl_sdl2.h"
+#include "imgui_impl_sdlrenderer2.h"
 
 #include <SDL2/SDL.h>
 #include <memory>
