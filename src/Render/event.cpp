@@ -36,6 +36,9 @@ void Render::handleEvents() {
                 int currentMouseX = event.motion.x;
                 int currentMouseY = event.motion.y;
 
+                currentMouseX /= scaleFactorX();
+                currentMouseY /= scaleFactorY();
+
                 fluid->setMousePos(currentMouseX, currentMouseY);
 
                 lastMouseX = currentMouseX;

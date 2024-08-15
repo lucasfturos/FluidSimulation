@@ -1,14 +1,16 @@
 #include "Render/render.hpp"
 #include <iostream>
-#include <memory>
 
 int main(void) {
     try {
         auto render = std::make_shared<Render>();
         render->run();
     } catch (const std::exception &e) {
-        std::cerr << e.what() << '\n';
-        return 1;
+        std::cerr << "Exception: " << e.what() << '\n';
+        return EXIT_FAILURE;
+    } catch (...) {
+        std::cerr << "Unknown error occurred.\n";
+        return EXIT_FAILURE;
     }
-    return 0;
+    return EXIT_SUCCESS;
 }

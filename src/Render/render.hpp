@@ -15,7 +15,7 @@
 #include <functional>
 
 static std::function<void()> loop;
-static void __attribute__((unused)) mainLoop() { loop(); }
+static inline void mainLoop() { loop(); }
 #endif
 
 class Render {
@@ -40,13 +40,18 @@ class Render {
     Uint32 frameStart;
     int frameTime;
 
+    float scaleFactorX() const;
+    float scaleFactorY() const;
+
+    // Draw
+    void draw();
+
+    // Event
+    void handleEvents();
+
     // Setup
     void setupImGui();
     void setupWindow();
-    void destroyWindow();
-
-    void handleEvents();
-    void draw();
 
   public:
     Render();

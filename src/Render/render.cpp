@@ -9,37 +9,48 @@ Render::Render()
     fluid->setSurface(surface);
 }
 
-Render::~Render() { destroyWindow(); }
+Render::~Render() {
+    ImGui_ImplSDLRenderer2_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
 
-void Render::draw() {
-    ImGui_ImplSDLRenderer2_NewFrame();
-    ImGui_ImplSDL2_NewFrame();
-    ImGui::NewFrame();
-
-    controlPanel->run();
-
-    if (SDL_LockSurface(surface) == 0) {
-        SDL_memset(surface->pixels, 0, surface->h * surface->pitch);
-
-        fluid->setSimulationParams(controlPanel->getSimulationParams());
-        fluid->draw();
-
-        SDL_UnlockSurface(surface);
-        SDL_UpdateTexture(texture, nullptr, surface->pixels, surface->pitch);
-        SDL_RenderClear(renderer);
-        SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+    if (texture) {
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+    }
+    if (surface) {
+        SDL_FreeSurface(surface);
+        surface = nullptr;
+    }
+    if (renderer) {
+        SDL_DestroyRenderer(renderer);
+        renderer = nullptr;
+    }
+    if (window) {
+        SDL_DestroyWindow(window);
+        window = nullptr;
     }
 
-    ImGui::Render();
-    ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
+    SDL_Quit();
+}
+
+float Render::scaleFactorX() const {
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+    return windowWidth / static_cast<float>(screenWidth);
+}
+
+float Render::scaleFactorY() const {
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+    return windowHeight / static_cast<float>(screenHeight);
 }
 
 void Render::run() {
     controlPanel->setup();
-
+    
 #ifdef __EMSCRIPTEN__
-    loop =
-        [&]()
+    loop = [&]()
 #else
     while (!quit)
 #endif
@@ -56,7 +67,7 @@ void Render::run() {
             SDL_Delay(frameDelay - frameTime);
         }
     };
-#if defined(__EMSCRIPTEN__)
+#ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(mainLoop, 0, true);
 #endif
 }
