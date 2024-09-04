@@ -18,7 +18,7 @@ Detalhes logo abaixo com os requisitos e instruções
 -   SDL2
 -   Emscripten
 
-### Instruções:
+### Instruções para Gerar o Executável:
 
 1. Clone o repositório:
 
@@ -43,6 +43,36 @@ cd build ; make -j4
 ```
 ./src/Fluid
 ```
+
+### Instruções para Gerar o Site:
+
+1. Clone o repositório como acima
+
+2. Crie a pasta e entre nela
+
+```
+mkdir build_site && cd build_site
+```
+
+3. Inicialize as configurações de compilação:
+
+```
+emcmake cmake ..
+```
+
+4. Compile o programa:
+
+```
+emmake make
+```
+
+5. Execute o site no server de sua escolha na pasta src:
+
+```
+python3 -m http.server -d src/
+```
+
+E entre no site Fluid.html
 
 </details>
 

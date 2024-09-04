@@ -19,8 +19,21 @@ set(RESOURCES_DIRECTORY
     "${CMAKE_SOURCE_DIR}/assets"
 )
 
+set(HTML_DIRECTORY
+    "${CMAKE_SOURCE_DIR}/html/"
+)
+
 file(COPY ${RESOURCES_DIRECTORY} 
     DESTINATION ${CMAKE_BINARY_DIR}
+)
+
+file(GLOB CSS_JS_FILES 
+    "${HTML_DIRECTORY}/*.css"
+    "${HTML_DIRECTORY}/*.js"
+)
+
+file(COPY ${CSS_JS_FILES}
+    DESTINATION ${CMAKE_BINARY_DIR}/src
 )
 
 add_compile_options(
