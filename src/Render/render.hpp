@@ -50,6 +50,7 @@ class Render {
     void handleEvents();
 
     // Setup
+    void setup();
     void setupImGui();
     void setupWindow();
 

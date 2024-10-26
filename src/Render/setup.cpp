@@ -1,5 +1,11 @@
 #include "render.hpp"
 
+void Render::setup() {
+    setupWindow();
+    setupImGui();
+    fluid->setSurface(surface);
+}
+
 void Render::setupImGui() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();

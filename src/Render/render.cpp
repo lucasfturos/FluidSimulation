@@ -3,11 +3,7 @@
 Render::Render()
     : window(nullptr), renderer(nullptr), texture(nullptr), surface(nullptr),
       quit(false), fluid(std::make_shared<Fluid>()),
-      controlPanel(std::make_shared<ControlPanel>()) {
-    setupWindow();
-    setupImGui();
-    fluid->setSurface(surface);
-}
+      controlPanel(std::make_shared<ControlPanel>()) {}
 
 Render::~Render() {
     ImGui_ImplSDLRenderer2_Shutdown();
@@ -47,8 +43,9 @@ float Render::scaleFactorY() const {
 }
 
 void Render::run() {
+    setup();
     controlPanel->setup();
-    
+
 #ifdef __EMSCRIPTEN__
     loop = [&]()
 #else
