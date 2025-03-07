@@ -19,8 +19,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Fluid.dir/Render/setup.cpp.o.d"
   "CMakeFiles/Fluid.dir/main.cpp.o"
   "CMakeFiles/Fluid.dir/main.cpp.o.d"
-  "Fluid.html"
-  "Fluid.pdb"
+  "index.html"
+  "index.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
