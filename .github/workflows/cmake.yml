@@ -1,0 +1,66 @@
+name: Deploy Fluid Simulation Site
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update packages list
+        run: sudo apt update
+
+      - name: Install dependencies (g++, CMake, Make, Doxygen, SDL2)
+        run: >
+          sudo apt install -y 
+          g++ 
+          cmake 
+          make 
+          doxygen 
+          libsdl2-dev
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Cache Emscripten
+        uses: actions/cache@v3
+        with:
+          path: external/emsdk
+          key: emscripten-${{ runner.os }}-${{ hashFiles('external/emsdk/emsdk') }}
+          restore-keys: emscripten-${{ runner.os }}-
+
+      - name: Install Emscripten
+        run: |
+          cd external/emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          source ./emsdk_env.sh
+          echo "EMSCRIPTEN_PATH=$(pwd)/upstream/emscripten" >> $GITHUB_ENV
+
+      - name: Test Emscripten
+        run: emcc -v
+
+      - name: Cache CMake Build
+        uses: actions/cache@v3
+        with:
+          path: build_site
+          key: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-${{ github.sha }}
+          restore-keys: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-
+
+      - name: Configure CMake
+        run: emcmake cmake -S . -B ${{github.workspace}}/build_site -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+      - name: Build
+        run: cmake --build ${{github.workspace}}/build_site --config ${{env.BUILD_TYPE}}
+
+      - name: Deploy Documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{github.workspace}}/build_site/html
