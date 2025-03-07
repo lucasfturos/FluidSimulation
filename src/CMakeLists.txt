@@ -50,6 +50,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 if(CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
     
+    set_target_properties(Fluid PROPERTIES OUTPUT_NAME "index")
+
     target_compile_options(${PROJECT_NAME} PRIVATE
         -s USE_SDL=2
     )
