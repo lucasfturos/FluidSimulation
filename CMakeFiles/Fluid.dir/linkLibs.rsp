@@ -1,0 +1,1 @@
+ ../external/libExternal_lib.a -sUSE_SDL=2 
