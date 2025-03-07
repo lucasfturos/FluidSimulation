@@ -22,7 +22,6 @@ jobs:
           cmake 
           make 
           doxygen 
-          libsdl2-dev
 
       - uses: actions/checkout@v3
         with:
@@ -54,7 +53,7 @@ jobs:
           restore-keys: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-
 
       - name: Configure CMake
-        run: emcmake cmake -S . -B ${{github.workspace}}/build_site -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        run: emcmake cmake -S . -B ${{github.workspace}}/build_site -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXE_LINKER_FLAGS="-sUSE_SDL=2"
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build_site --config ${{env.BUILD_TYPE}}
