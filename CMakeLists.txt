@@ -37,7 +37,7 @@ file(COPY ${CSS_JS_FILES}
 )
 
 add_compile_options(
-    -Wall -Wextra -Wpedantic -Werror -pedantic -g -O3 -ffast-math 
+    -Wall -Wextra -Wpedantic -pedantic -g -O3 -ffast-math 
 )
 
 add_subdirectory(external)
