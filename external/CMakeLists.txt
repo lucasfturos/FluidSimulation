@@ -24,8 +24,6 @@ set(EXTERNAL_SOURCES
     imgui/backends/imgui_impl_sdlrenderer2.cpp
 )
 
-add_compile_options(-Wno-error=nontrivial-memcall)
-
 find_package(SDL2 REQUIRED)
 
 add_library(External_lib STATIC 
@@ -34,7 +32,7 @@ add_library(External_lib STATIC
 )
 
 foreach(SOURCE_FILE ${EXTERNAL_SOURCES})
-    set_source_files_properties(${SOURCE_FILE} PROPERTIES COMPILE_FLAGS -w)
+    set_source_files_properties(${SOURCE_FILE} PROPERTIES COMPILE_FLAGS "-w -Wno-error")
 endforeach()
 
 target_include_directories(External_lib PUBLIC
