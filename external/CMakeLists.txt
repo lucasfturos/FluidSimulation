@@ -32,7 +32,7 @@ add_library(External_lib STATIC
 )
 
 foreach(SOURCE_FILE ${EXTERNAL_SOURCES})
-    set_source_files_properties(${SOURCE_FILE} PROPERTIES COMPILE_FLAGS "-w -Wno-error")
+    set_source_files_properties(${SOURCE_FILE} PROPERTIES COMPILE_FLAGS "-w -Wno-error -Wno-nontrivial-memcall")
 endforeach()
 
 target_include_directories(External_lib PUBLIC
