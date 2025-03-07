@@ -40,8 +40,8 @@ jobs:
           cd external/emsdk
           ./emsdk install latest
           ./emsdk activate latest
-          source ./emsdk_env.sh
           echo "EMSCRIPTEN_PATH=$(pwd)/upstream/emscripten" >> $GITHUB_ENV
+          echo "$(pwd)/upstream/emscripten" >> $GITHUB_PATH
 
       - name: Test Emscripten
         run: emcc -v
