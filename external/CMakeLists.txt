@@ -24,6 +24,8 @@ set(EXTERNAL_SOURCES
     imgui/backends/imgui_impl_sdlrenderer2.cpp
 )
 
+add_compile_options(-Wno-error=nontrivial-memcall)
+
 find_package(SDL2 REQUIRED)
 
 add_library(External_lib STATIC 

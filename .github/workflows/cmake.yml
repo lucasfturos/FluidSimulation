@@ -15,7 +15,7 @@ jobs:
       - name: Update packages list
         run: sudo apt update
 
-      - name: Install dependencies (g++, CMake, Make, Doxygen, SDL2)
+      - name: Install dependencies (g++, CMake, Make, Doxygen)
         run: >
           sudo apt install -y 
           g++ 
