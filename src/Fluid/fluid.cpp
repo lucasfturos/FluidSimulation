@@ -2,7 +2,7 @@
 
 Fluid::Fluid()
     : surface(nullptr), pixels(nullptr), perlin(std::make_shared<Perlin>()),
-      circlePhysics(std::make_unique<CirclePhysics>()),
+      circlePhysics(std::make_shared<CirclePhysics>()),
       densityDrawer(std::make_unique<DensityDrawer>()), s(nSize, 0.0f),
       density(nSize, 0.0f), Vx(nSize, 0.0f), Vy(nSize, 0.0f), Vx0(nSize, 0.0f),
       Vy0(nSize, 0.0f), mouseX(0), mouseY(0) {}
@@ -22,13 +22,6 @@ void Fluid::setMousePos(int x, int y) {
     mouseY = y;
 }
 
-void Fluid::applyFluidInteraction(int cx, int cy, int densityValue, float vX,
-                                  float vY, float turbulenceFactor) {
-    addDensity(cx, cy, densityValue);
-    addVelocity(cx, cy, vX, vY);
-    addTurbulence(cx, cy, turbulenceFactor, vX, vY);
-}
-
 void Fluid::draw() {
     std::fill(pixels, pixels + nSize, SDL_MapRGB(surface->format, 0, 0, 0));
     step();
@@ -37,12 +30,23 @@ void Fluid::draw() {
     int height = surface->h;
     int scale = params.scale;
 
-    int radius = 10;
-    int collisionX = (width * 0.1 / scale) + 30;
-    int collisionY = height * 0.5 / scale;
+    circlePhysics->setSize(N);
+    circlePhysics->setScale(scale);
 
-    circlePhysics->setCollision(collisionX, collisionY);
+    int radius = 10;
+    circlePhysics->setRadius(radius);
+
+    int positionX = (width * 0.1 / scale) + 30;
+    int positionY = height * 0.5 / scale;
+    circlePhysics->setPosCollision(positionX, positionY);
+
+    circlePhysics->setVelocity(&Vx, &Vy);
+    circlePhysics->setVelocity0(&Vx0, &Vy0);
+
     circlePhysics->collision();
+
+    std::tie(Vx, Vy) = circlePhysics->getVelocity();
+    std::tie(Vx0, Vy0) = circlePhysics->getVelocity0();
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -79,13 +83,12 @@ void Fluid::draw() {
     }
 
     densityDrawer->setSize(N);
-    densityDrawer->setScale(params.scale);
+    densityDrawer->setScale(scale);
     densityDrawer->setDensityData(density);
     densityDrawer->draw();
 
+    circlePhysics->setPosition(positionX, positionY);
     Uint32 fillColor = SDL_MapRGB(surface->format, 255, 0, 0);
-    circlePhysics->setPosition(collisionX * scale, collisionY * scale);
-    circlePhysics->setRadius(radius);
     circlePhysics->setColor(fillColor);
     circlePhysics->draw();
 

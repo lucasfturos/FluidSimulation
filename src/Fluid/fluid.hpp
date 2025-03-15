@@ -21,7 +21,7 @@ class Fluid {
     SDL_Surface *surface;
     Uint32 *pixels;
     std::shared_ptr<Perlin> perlin;
-    std::unique_ptr<CirclePhysics> circlePhysics;
+    std::shared_ptr<CirclePhysics> circlePhysics;
     std::unique_ptr<DensityDrawer> densityDrawer;
 
     std::vector<float> s;

@@ -47,6 +47,13 @@ void Fluid::addTurbulence(int x, int y, float t, float amountX, float amountY) {
     Vy[index] += amountY * (1.0f + turbulenceStrength * noiseValueY);
 }
 
+void Fluid::applyFluidInteraction(int cx, int cy, int densityValue, float vX,
+                                  float vY, float turbulenceFactor) {
+    addDensity(cx, cy, densityValue);
+    addVelocity(cx, cy, vX, vY);
+    addTurbulence(cx, cy, turbulenceFactor, vX, vY);
+}
+
 void Fluid::fadeDensity() {
     for (std::size_t i = 0; i < density.size(); ++i) {
         density[i] = std::max(density[i] - 0.02f, 0.0f);
