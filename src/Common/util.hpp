@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL_stdinc.h>
+#include <algorithm>
 #include <cmath>
 #include <vector>
 
@@ -54,6 +55,18 @@ inline Uint32 getColorByValue(int value, float saturation = 0.8f,
 }
 
 inline float toRad(float angle) { return angle * M_PI / 180.0f; }
+
+/**
+ * Function of indexing the 1D array
+ * - x : int
+ * - y : int
+ * Returns the index for a given (x, y) pair
+ */
+inline int IX(int x, int y, int size) {
+    x = std::clamp(x, 0, size - 1);
+    y = std::clamp(y, 0, size - 1);
+    return x + y * size;
+}
 
 struct SimulationParams {
     int iter;

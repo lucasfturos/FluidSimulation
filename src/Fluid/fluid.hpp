@@ -3,6 +3,9 @@
 #include "Common/perlin.hpp"
 #include "Common/util.hpp"
 
+#include "Visuals/circle.hpp"
+#include "Visuals/density.hpp"
+
 #include <SDL2/SDL.h>
 #include <algorithm>
 #include <fstream>
@@ -18,6 +21,8 @@ class Fluid {
     SDL_Surface *surface;
     Uint32 *pixels;
     std::shared_ptr<Perlin> perlin;
+    std::unique_ptr<CircleDrawer> circleDrawer;
+    std::unique_ptr<DensityDrawer> densityDrawer;
 
     std::vector<float> s;
     std::vector<float> density;
@@ -28,8 +33,6 @@ class Fluid {
   private:
     SimulationParams params;
 
-    void drawDensity();
-    void drawCircle(int, int, int, Uint32);
     void applyFluidInteraction(int, int, int, float, float, float);
 
     // Logic
@@ -41,7 +44,6 @@ class Fluid {
     void fadeDensity();
 
     // Util
-    int IX(int, int);
     void setBND(int, std::vector<float> &);
     void project(std::vector<float> &, std::vector<float> &,
                  std::vector<float> &, std::vector<float> &);

@@ -19,18 +19,18 @@ void Fluid::step() {
 }
 
 void Fluid::addDensity(int x, int y, float amount) {
-    int index = IX(x, y);
+    int index = IX(x, y, N);
     density[index] += amount;
 }
 
 void Fluid::addVelocity(int x, int y, float amountX, float amountY) {
-    int index = IX(x, y);
+    int index = IX(x, y, N);
     Vx[index] += amountX;
     Vy[index] += amountY;
 }
 
 void Fluid::addTurbulence(int x, int y, float t, float amountX, float amountY) {
-    int index = IX(x, y);
+    int index = IX(x, y, N);
     float noiseScale = 0.9f;
     float noiseWeight = 0.9f;
     float turbulenceStrength = 0.9f;
@@ -65,7 +65,7 @@ void Fluid::updateCircleCollision(int cx, int cy, int radius, float friction) {
             int dx = i - cx;
             int dy = j - cy;
             if ((dx * dx + dy * dy) <= ((radius * radius) / scale)) {
-                int index = IX(i, j);
+                int index = IX(i, j, N);
                 float length = std::sqrt(dx * dx + dy * dy);
                 if (length > 0) {
                     float nx = dx / length;

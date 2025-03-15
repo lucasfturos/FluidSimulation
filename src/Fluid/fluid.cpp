@@ -2,12 +2,17 @@
 
 Fluid::Fluid()
     : surface(nullptr), pixels(nullptr), perlin(std::make_shared<Perlin>()),
-      s(nSize, 0.0f), density(nSize, 0.0f), Vx(nSize, 0.0f), Vy(nSize, 0.0f),
-      Vx0(nSize, 0.0f), Vy0(nSize, 0.0f), mouseX(0), mouseY(0) {}
+      circleDrawer(std::make_unique<CircleDrawer>()),
+      densityDrawer(std::make_unique<DensityDrawer>()), s(nSize, 0.0f),
+      density(nSize, 0.0f), Vx(nSize, 0.0f), Vy(nSize, 0.0f), Vx0(nSize, 0.0f),
+      Vy0(nSize, 0.0f), mouseX(0), mouseY(0) {}
 
 void Fluid::setSurface(SDL_Surface *renderSurface) {
     surface = renderSurface;
     pixels = static_cast<Uint32 *>(renderSurface->pixels);
+
+    circleDrawer->setSurface(surface);
+    densityDrawer->setSurface(surface);
 }
 
 void Fluid::setSimulationParams(SimulationParams p) { params = p; }
@@ -15,45 +20,6 @@ void Fluid::setSimulationParams(SimulationParams p) { params = p; }
 void Fluid::setMousePos(int x, int y) {
     mouseX = x;
     mouseY = y;
-}
-
-void Fluid::drawCircle(int cx, int cy, int radius, Uint32 color) {
-    int width = surface->w;
-    int height = surface->h;
-
-    for (int y = cy - radius; y <= cy + radius; ++y) {
-        if (y < 0 || y >= height)
-            continue;
-        for (int x = cx - radius; x <= cx + radius; ++x) {
-            if (x < 0 || x >= width)
-                continue;
-            int dx = x - cx;
-            int dy = y - cy;
-            if ((dx * dx + dy * dy) <= (radius * radius)) {
-                pixels[y * width + x] = color;
-            }
-        }
-    }
-}
-
-void Fluid::drawDensity() {
-    int width = surface->w;
-    int height = surface->h;
-    int scale = params.scale;
-
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            int x = i * scale;
-            int y = j * scale;
-            Uint8 opacity = density[IX(i, j)];
-            Uint32 color = getColorByValue(std::fmod((opacity + 50), 255.0f),
-                                           200 / 255.0f, opacity / 255.0f);
-            if (x >= 0 && x < width && y >= 0 && y < height) {
-                SDL_Rect rect = {x, y, scale, scale};
-                SDL_FillRect(surface, &rect, color);
-            }
-        }
-    }
 }
 
 void Fluid::applyFluidInteraction(int cx, int cy, int densityValue, float vX,
@@ -110,10 +76,17 @@ void Fluid::draw() {
         }
     }
 
-    drawDensity();
+    densityDrawer->setSize(N);
+    densityDrawer->setScale(params.scale);
+    densityDrawer->setDensityData(density);
+    densityDrawer->draw();
 
     Uint32 fillColor = SDL_MapRGB(surface->format, 255, 0, 0);
-    drawCircle(collisionX * scale, collisionY * scale, radius, fillColor);
+    circleDrawer->setX(collisionX * scale);
+    circleDrawer->setY(collisionY * scale);
+    circleDrawer->setRadius(radius);
+    circleDrawer->setColor(fillColor);
+    circleDrawer->draw();
 
     fadeDensity();
 }
