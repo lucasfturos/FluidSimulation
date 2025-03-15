@@ -816,24 +816,26 @@ src/CMakeFiles/Fluid.dir/Fluid/logic.cpp.o: \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/inttypes.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/lib/clang/21/include/inttypes.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/inttypes.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_surface.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_pixels.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_endian.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rect.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_error.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rwops.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_blendmode.h \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_main.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_assert.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_atomic.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_audio.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_error.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_endian.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_mutex.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_thread.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rwops.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_clipboard.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_cpuinfo.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_events.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_video.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_pixels.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rect.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_surface.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_blendmode.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_keyboard.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_keycode.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_scancode.h \
