@@ -3,7 +3,7 @@
 #include "Common/perlin.hpp"
 #include "Common/util.hpp"
 
-#include "Visuals/circle.hpp"
+#include "Visuals/circle_physics.hpp"
 #include "Visuals/density.hpp"
 
 #include <SDL2/SDL.h>
@@ -21,7 +21,7 @@ class Fluid {
     SDL_Surface *surface;
     Uint32 *pixels;
     std::shared_ptr<Perlin> perlin;
-    std::unique_ptr<CircleDrawer> circleDrawer;
+    std::unique_ptr<CirclePhysics> circlePhysics;
     std::unique_ptr<DensityDrawer> densityDrawer;
 
     std::vector<float> s;
@@ -40,7 +40,6 @@ class Fluid {
     void addDensity(int, int, float);
     void addVelocity(int, int, float, float);
     void addTurbulence(int, int, float, float, float);
-    void updateCircleCollision(int, int, int, float = 1.0f);
     void fadeDensity();
 
     // Util

@@ -9,8 +9,7 @@ class DensityDrawer {
   private:
     SDL_Surface *surface;
     std::vector<float> density;
-    int size;
-    int scale;
+    int size, scale;
 
   public:
     DensityDrawer() : surface(nullptr) {}
@@ -18,6 +17,7 @@ class DensityDrawer {
     void setSize(int size) { this->size = size; }
     void setScale(int scaleFactor) { this->scale = scaleFactor; }
     void setSurface(SDL_Surface *surface) { this->surface = surface; }
+
     void setDensityData(std::vector<float> &densityField) {
         this->density = densityField;
     }

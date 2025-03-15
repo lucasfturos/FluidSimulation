@@ -2,7 +2,7 @@
 
 Fluid::Fluid()
     : surface(nullptr), pixels(nullptr), perlin(std::make_shared<Perlin>()),
-      circleDrawer(std::make_unique<CircleDrawer>()),
+      circlePhysics(std::make_unique<CirclePhysics>()),
       densityDrawer(std::make_unique<DensityDrawer>()), s(nSize, 0.0f),
       density(nSize, 0.0f), Vx(nSize, 0.0f), Vy(nSize, 0.0f), Vx0(nSize, 0.0f),
       Vy0(nSize, 0.0f), mouseX(0), mouseY(0) {}
@@ -11,7 +11,7 @@ void Fluid::setSurface(SDL_Surface *renderSurface) {
     surface = renderSurface;
     pixels = static_cast<Uint32 *>(renderSurface->pixels);
 
-    circleDrawer->setSurface(surface);
+    circlePhysics->setSurface(surface);
     densityDrawer->setSurface(surface);
 }
 
@@ -40,7 +40,9 @@ void Fluid::draw() {
     int radius = 10;
     int collisionX = (width * 0.1 / scale) + 30;
     int collisionY = height * 0.5 / scale;
-    updateCircleCollision(collisionX, collisionY, radius);
+
+    circlePhysics->setCollision(collisionX, collisionY);
+    circlePhysics->collision();
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -82,11 +84,10 @@ void Fluid::draw() {
     densityDrawer->draw();
 
     Uint32 fillColor = SDL_MapRGB(surface->format, 255, 0, 0);
-    circleDrawer->setX(collisionX * scale);
-    circleDrawer->setY(collisionY * scale);
-    circleDrawer->setRadius(radius);
-    circleDrawer->setColor(fillColor);
-    circleDrawer->draw();
+    circlePhysics->setPosition(collisionX * scale, collisionY * scale);
+    circlePhysics->setRadius(radius);
+    circlePhysics->setColor(fillColor);
+    circlePhysics->draw();
 
     fadeDensity();
 }
