@@ -1,6 +1,8 @@
 #include "render.hpp"
 
 void Render::draw() {
+    fluid->setup();
+
     ImGui_ImplSDLRenderer2_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();

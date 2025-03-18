@@ -54,6 +54,41 @@ void Fluid::applyFluidInteraction(int cx, int cy, int densityValue, float vX,
     addTurbulence(cx, cy, turbulenceFactor, vX, vY);
 }
 
+void Fluid::applyMouseInteraction(int &lastMouseX, int &lastMouseY, int scale) {
+
+    int cx = mouseX / scale;
+    int cy = mouseY / scale;
+
+    int deltaX = mouseX - lastMouseX;
+    int deltaY = mouseY - lastMouseY;
+
+    float vX = deltaX * 0.2f;
+    float vY = deltaY * 0.2f;
+
+    applyFluidInteraction(cx, cy, 350.0f, vX, vY, 0.01f);
+
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+}
+
+void Fluid::applyRandomInteraction(int width, int height, int scale, float &t) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(50.0f, 350.0f);
+
+    int cx = static_cast<int>(width * 0.1 / scale);
+    int cy = static_cast<int>(height * 0.5 / scale);
+
+    for (int i = 0; i < 6; ++i) {
+        float angle = 2 * M_PI;
+        float vX = std::cos(angle) * 0.1f;
+        float vY = std::sin(angle) * 0.1f;
+
+        applyFluidInteraction(cx, cy, dis(gen), vX, vY, t);
+        t += 0.01f;
+    }
+}
+
 void Fluid::fadeDensity() {
     for (std::size_t i = 0; i < density.size(); ++i) {
         density[i] = std::max(density[i] - 0.02f, 0.0f);

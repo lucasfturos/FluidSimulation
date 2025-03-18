@@ -21,7 +21,9 @@ class Fluid {
 
   private:
     SDL_Surface *surface;
+
     Uint32 *pixels;
+
     std::unique_ptr<Perlin> perlin;
     std::unique_ptr<NACA_Airfoil> nacaAirfoil;
     std::unique_ptr<CirclePhysics> circlePhysics;
@@ -31,7 +33,10 @@ class Fluid {
     Vector1f density;
     Vector1f Vx, Vy;
     Vector1f Vx0, Vy0;
+
+    int width, height;
     int mouseX, mouseY;
+    int scale;
 
   private:
     SimulationParams params;
@@ -64,8 +69,10 @@ class Fluid {
   public:
     Fluid();
 
-    void setSurface(SDL_Surface *);
     void setMousePos(int, int);
+    void setSurface(SDL_Surface *);
     void setSimulationParams(SimulationParams);
+
+    void setup();
     void draw();
 };
