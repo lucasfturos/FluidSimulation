@@ -5,7 +5,7 @@
  * - b : int
  * - x : std::vector<float> &
  */
-void Fluid::setBND(int b, std::vector<float> &x) {
+void Fluid::setBND(int b, Vector1f &x) {
     for (int i = 1; i < N - 1; i++) {
         x[IX(i, 0, N)] = b == 2 ? -x[IX(i, 1, N)] : x[IX(i, 1, N)];
         x[IX(i, N - 1, N)] = b == 2 ? -x[IX(i, N - 2, N)] : x[IX(i, N - 2, N)];
@@ -30,8 +30,8 @@ void Fluid::setBND(int b, std::vector<float> &x) {
  * - p : std::vector<float> &
  * - div : std::vector<float> &
  */
-void Fluid::project(std::vector<float> &velocX, std::vector<float> &velocY,
-                    std::vector<float> &p, std::vector<float> &div) {
+void Fluid::project(Vector1f &velocX, Vector1f &velocY, Vector1f &p,
+                    Vector1f &div) {
     for (int j = 1; j < N - 1; ++j) {
         for (int i = 1; i < N - 1; ++i) {
             div[IX(i, j, N)] =
@@ -68,9 +68,8 @@ void Fluid::project(std::vector<float> &velocX, std::vector<float> &velocY,
  * - velocY : const std::vector<float> &
  * - dt : float
  */
-void Fluid::advect(int b, std::vector<float> &d, const std::vector<float> &d0,
-                   const std::vector<float> &velocX,
-                   const std::vector<float> &velocY, float dt) {
+void Fluid::advect(int b, Vector1f &d, const Vector1f &d0,
+                   const Vector1f &velocX, const Vector1f &velocY, float dt) {
     float i0, i1, j0, j1;
 
     float dtx = dt * (N - 2);
@@ -132,8 +131,7 @@ void Fluid::advect(int b, std::vector<float> &d, const std::vector<float> &d0,
  * - a : float
  * - c : float
  */
-void Fluid::linSolve(int b, std::vector<float> &x, const std::vector<float> &x0,
-                     float a, float c) {
+void Fluid::linSolve(int b, Vector1f &x, const Vector1f &x0, float a, float c) {
     int iter = params.iter;
     float cRecip = 1.0f / c;
     for (int t = 0; t < iter; t++) {
@@ -158,8 +156,8 @@ void Fluid::linSolve(int b, std::vector<float> &x, const std::vector<float> &x0,
  * - diff : float
  * - dt : float
  */
-void Fluid::diffuse(int b, std::vector<float> &x, const std::vector<float> &x0,
-                    float diff, float dt) {
+void Fluid::diffuse(int b, Vector1f &x, const Vector1f &x0, float diff,
+                    float dt) {
     float a = dt * diff * (N - 2) * (N - 2);
     linSolve(b, x, x0, a, 1 + 6 * a);
 }

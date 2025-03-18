@@ -5,10 +5,12 @@
 
 #include "Visuals/circle_physics.hpp"
 #include "Visuals/density.hpp"
+#include "Visuals/naca_airfoil.hpp"
 
 #include <SDL2/SDL.h>
 #include <algorithm>
 #include <fstream>
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -20,38 +22,44 @@ class Fluid {
   private:
     SDL_Surface *surface;
     Uint32 *pixels;
-    std::shared_ptr<Perlin> perlin;
-    std::shared_ptr<CirclePhysics> circlePhysics;
+    std::unique_ptr<Perlin> perlin;
+    std::unique_ptr<NACA_Airfoil> nacaAirfoil;
+    std::unique_ptr<CirclePhysics> circlePhysics;
     std::unique_ptr<DensityDrawer> densityDrawer;
 
-    std::vector<float> s;
-    std::vector<float> density;
-    std::vector<float> Vx, Vy;
-    std::vector<float> Vx0, Vy0;
+    Vector1f s;
+    Vector1f density;
+    Vector1f Vx, Vy;
+    Vector1f Vx0, Vy0;
     int mouseX, mouseY;
 
   private:
     SimulationParams params;
 
-    void applyFluidInteraction(int, int, int, float, float, float);
+    void setupNACA(int, int, int);
+    void setupCircle(int, int, int);
+
+    void drawNACA();
+    void drawCircle();
+    void drawDensity(int);
+    void applyMouseInteraction(int &, int &, int);
+    void applyRandomInteraction(int, int, int, float &);
 
     // Logic
     void step();
+    void fadeDensity();
     void addDensity(int, int, float);
     void addVelocity(int, int, float, float);
     void addTurbulence(int, int, float, float, float);
-    void fadeDensity();
+    void applyFluidInteraction(int, int, int, float, float, float);
 
     // Util
-    void setBND(int, std::vector<float> &);
-    void project(std::vector<float> &, std::vector<float> &,
-                 std::vector<float> &, std::vector<float> &);
-    void advect(int, std::vector<float> &, const std::vector<float> &,
-                const std::vector<float> &, const std::vector<float> &, float);
-    void linSolve(int, std::vector<float> &, const std::vector<float> &, float,
-                  float);
-    void diffuse(int, std::vector<float> &x, const std::vector<float> &, float,
-                 float);
+    void setBND(int, Vector1f &);
+    void project(Vector1f &, Vector1f &, Vector1f &, Vector1f &);
+    void linSolve(int, Vector1f &, const Vector1f &, float, float);
+    void diffuse(int, Vector1f &x, const Vector1f &, float, float);
+    void advect(int, Vector1f &, const Vector1f &, const Vector1f &,
+                const Vector1f &, float);
 
   public:
     Fluid();

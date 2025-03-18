@@ -7,9 +7,6 @@
 #include <vector>
 
 class CirclePhysics {
-  protected:
-    const float eps = 1e-6f;
-
   private:
     SDL_Surface *surface;
 
@@ -17,36 +14,33 @@ class CirclePhysics {
     Uint32 color;
 
     int circleX, circleY;
-    int collisionX, collisionY;
-    int radius, size, scale;
+    int radius, gridSize, scale;
 
     float friction;
 
-    std::vector<float> Vx, Vy;
-    std::vector<float> Vx0, Vy0;
+    Vector1f Vx, Vy;
+    Vector1f Vx0, Vy0;
 
   public:
     CirclePhysics() : surface(nullptr), pixels(nullptr), friction(1.0f) {}
 
-    void setSize(int size) { this->size = size; }
+    void setSize(int size) { this->gridSize = size; }
     void setScale(int scale) { this->scale = scale; }
     void setColor(Uint32 color) { this->color = color; }
     void setRadius(int radius) { this->radius = radius; }
     void setFriction(float friction) { this->friction = friction; }
 
     void setPosition(int x, int y) {
-        this->circleX = x * this->scale;
-        this->circleY = y * this->scale;
+        this->circleX = x;
+        this->circleY = y;
     }
-    void setPosCollision(int x, int y) {
-        this->collisionX = x;
-        this->collisionY = y;
-    }
-    void setVelocity0(std::vector<float> *Vx0, std::vector<float> *Vy0) {
+
+    void setVelocity0(Vector1f *Vx0, Vector1f *Vy0) {
         this->Vx0 = *Vx0;
         this->Vy0 = *Vy0;
     }
-    void setVelocity(std::vector<float> *Vx, std::vector<float> *Vy) {
+
+    void setVelocity(Vector1f *Vx, Vector1f *Vy) {
         this->Vx = *Vx;
         this->Vy = *Vy;
     }
@@ -56,26 +50,21 @@ class CirclePhysics {
         pixels = static_cast<Uint32 *>(renderSurface->pixels);
     }
 
-    std::pair<std::vector<float> &, std::vector<float> &> getVelocity() {
-        return {Vx, Vy};
-    }
-
-    std::pair<std::vector<float> &, std::vector<float> &> getVelocity0() {
-        return {Vx0, Vy0};
-    }
+    const Vector2f getVelocity() const { return {Vx, Vy}; }
+    const Vector2f getVelocity0() const { return {Vx0, Vy0}; }
 
     void collision() {
-        int startX = std::max(0, collisionX - radius);
-        int endX = std::min(size - 1, collisionX + radius);
-        int startY = std::max(0, collisionY - radius);
-        int endY = std::min(size - 1, collisionY + radius);
+        int startX = std::max(0, circleX - radius);
+        int endX = std::min(gridSize - 1, circleX + radius);
+        int startY = std::max(0, circleY - radius);
+        int endY = std::min(gridSize - 1, circleY + radius);
 
         for (int j = startY; j <= endY; ++j) {
             for (int i = startX; i <= endX; ++i) {
-                int dx = i - collisionX;
-                int dy = j - collisionY;
+                int dx = i - circleX;
+                int dy = j - circleY;
                 if ((dx * dx + dy * dy) <= ((radius * radius) / scale)) {
-                    int index = IX(i, j, size);
+                    int index = IX(i, j, gridSize);
                     float length = std::sqrt(dx * dx + dy * dy);
                     if (length > 0.0f) {
                         float nx = dx / length;
@@ -100,17 +89,19 @@ class CirclePhysics {
     }
 
     void draw() {
+        int cx = circleX * scale;
+        int cy = circleY * scale;
         int width = surface->w;
         int height = surface->h;
 
-        for (int y = circleY - radius; y <= circleY + radius; ++y) {
+        for (int y = cy - radius; y <= cy + radius; ++y) {
             if (y < 0 || y >= height)
                 continue;
-            for (int x = circleX - radius; x <= circleX + radius; ++x) {
+            for (int x = cx - radius; x <= cx + radius; ++x) {
                 if (x < 0 || x >= width)
                     continue;
-                int dx = x - circleX;
-                int dy = y - circleY;
+                int dx = x - cx;
+                int dy = y - cy;
                 if ((dx * dx + dy * dy) <= (radius * radius)) {
                     pixels[y * width + x] = color;
                 }

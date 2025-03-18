@@ -3,13 +3,23 @@
 #include <SDL2/SDL_stdinc.h>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <vector>
 
+// Constants
+const float eps = std::numeric_limits<float>::epsilon();
+
+// Alias Vector
+using Vector1f = std::vector<float>;
+using Vector2f = std::pair<std::vector<float>, std::vector<float>>;
+
+// Alias Color
 template <typename T = Uint8> struct Color { T r, g, b, a = 0; };
 
 using Colori = Color<>;
 using Colorf = Color<float>;
 
+// Util Functions
 inline Uint32 HSV2RGB(float h, float s, float v) {
     Colorf color;
     int i = static_cast<int>(std::floor(h * 6));
@@ -54,7 +64,7 @@ inline Uint32 getColorByValue(int value, float saturation = 0.8f,
     return HSV2RGB(hue, saturation, brightness);
 }
 
-inline float toRad(float angle) { return angle * M_PI / 180.0f; }
+inline float toRadians(float angle) { return angle * M_PI / 180.0f; }
 
 /**
  * Function of indexing the 1D array
@@ -68,11 +78,13 @@ inline int IX(int x, int y, int size) {
     return x + y * size;
 }
 
+// Structs
 struct SimulationParams {
     int iter;
     int scale;
     float diffusion;
     float viscosity;
     float dt;
+    int object;
     bool enableMouse;
 };
