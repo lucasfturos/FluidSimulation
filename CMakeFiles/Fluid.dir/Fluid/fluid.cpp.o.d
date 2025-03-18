@@ -825,6 +825,7 @@ src/CMakeFiles/Fluid.dir/Fluid/fluid.cpp.o: \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rwops.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_blendmode.h \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_main.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_assert.h \
