@@ -40,6 +40,7 @@ class Fluid {
 
   private:
     SimulationParams params;
+    NACA_AirfoilProfile profile;
 
     void setupNACA(int, int, int);
     void setupCircle(int, int, int);
@@ -72,6 +73,7 @@ class Fluid {
     void setMousePos(int, int);
     void setSurface(SDL_Surface *);
     void setSimulationParams(SimulationParams);
+    void setNACA_AirfoilProfile(NACA_AirfoilProfile);
 
     void setup();
     void draw();

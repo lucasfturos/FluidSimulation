@@ -13,6 +13,7 @@ void Render::draw() {
         SDL_memset(surface->pixels, 0, surface->h * surface->pitch);
 
         fluid->setSimulationParams(controlPanel->getSimulationParams());
+        fluid->setNACA_AirfoilProfile(controlPanel->getNACA_AirfoilProfile());
         fluid->draw();
 
         SDL_UnlockSurface(surface);

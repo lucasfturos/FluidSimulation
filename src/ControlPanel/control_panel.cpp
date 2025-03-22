@@ -1,19 +1,26 @@
 #include "control_panel.hpp"
 
 ControlPanel::ControlPanel()
-    : params({16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false}) {}
+    : params({16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 1, false}),
+      profile({2.0f, 50.0f, 12.0f}) {}
 
 SimulationParams ControlPanel::getSimulationParams() { return params; }
+
+NACA_AirfoilProfile ControlPanel::getNACA_AirfoilProfile() { return profile; }
 
 void ControlPanel::setup() {
     styleWidget();
     initFont();
 }
 
-void ControlPanel::run() {
-    ImGui::Begin("Control Panel");
+void ControlPanel::mainWindow() {
+    ImGui::Begin("Control Panel", nullptr, flags);
     ImGui::SetWindowPos(ImVec2(0, 0));
     ImGui::SetWindowSize(ImVec2(width, height));
+
+    ImVec2 mainPos = ImGui::GetWindowPos();
+    ImVec2 mainSize = ImGui::GetWindowSize();
+    bottomMainHeight = mainPos.y + mainSize.y;
 
     ImGui::Separator();
 
@@ -36,4 +43,40 @@ void ControlPanel::run() {
     ImGui::Separator();
 
     ImGui::End();
+}
+
+void ControlPanel::nacaWindow() {
+    ImGui::Begin("Defines the NACA Airfoil Profile", nullptr, flags);
+    ImGui::SetWindowPos(ImVec2(0, bottomMainHeight + 1));
+    ImGui::SetWindowSize(ImVec2(widthProfile, heightProfile));
+
+    ImGui::PushItemWidth(180);
+    ImGui::InputFloat("Camber", &profile.camber, 0.1f, 1.0f, "%.1f",
+                      ImGuiInputTextFlags_CharsDecimal);
+    profile.camber = (profile.camber < 0.0f)   ? 0.0f
+                     : (profile.camber > 9.5f) ? 9.5f
+                                               : profile.camber;
+
+    ImGui::InputFloat("Max Camber", &profile.maxCamber, 0.1f, 1.0f, "%.1f",
+                      ImGuiInputTextFlags_CharsDecimal);
+    profile.maxCamber = (profile.maxCamber < 0.0f)    ? 0.0f
+                        : (profile.maxCamber > 90.0f) ? 90.0f
+                                                      : profile.maxCamber;
+
+    ImGui::InputFloat("Thickness", &profile.thickness, 0.1f, 1.0f, "%.1f",
+                      ImGuiInputTextFlags_CharsDecimal);
+    profile.thickness = (profile.thickness < 1.0f)    ? 1.0f
+                        : (profile.thickness > 40.0f) ? 40.0f
+                                                      : profile.thickness;
+    ImGui::PopItemWidth();
+
+    ImGui::Separator();
+
+    ImGui::End();
+}
+
+void ControlPanel::run() {
+    mainWindow();
+    if (params.object == 1)
+        nacaWindow();
 }

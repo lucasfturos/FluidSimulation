@@ -7,11 +7,20 @@ class ControlPanel {
   protected:
     const int width = 300;
     const int height = 300;
+    const int widthProfile = width;
+    const int heightProfile = 130;
+    const int flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
 
     const std::vector<const char *> objects = {"Circle", "NACA"};
 
   private:
+    float bottomMainHeight;
+
     SimulationParams params;
+    NACA_AirfoilProfile profile;
+
+    void mainWindow();
+    void nacaWindow();
 
     // GUI
     void initFont();
@@ -21,6 +30,7 @@ class ControlPanel {
     ControlPanel();
 
     SimulationParams getSimulationParams();
+    NACA_AirfoilProfile getNACA_AirfoilProfile();
 
     void setup();
     void run();

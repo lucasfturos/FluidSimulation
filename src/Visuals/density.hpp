@@ -8,7 +8,7 @@
 class DensityDrawer {
   private:
     SDL_Surface *surface;
-    std::vector<float> density;
+    Vector1f density;
     int size, scale;
 
   public:
@@ -18,7 +18,7 @@ class DensityDrawer {
     void setScale(int scaleFactor) { this->scale = scaleFactor; }
     void setSurface(SDL_Surface *surface) { this->surface = surface; }
 
-    void setDensityData(std::vector<float> &densityField) {
+    void setDensityData(Vector1f &densityField) {
         this->density = densityField;
     }
 
@@ -30,12 +30,11 @@ class DensityDrawer {
             for (int j = 0; j < size; j++) {
                 int x = i * scale;
                 int y = j * scale;
-                Uint8 opacity = density[IX(i, j, size)];
-                Uint32 color =
-                    getColorByValue(std::fmod((opacity + 50), 255.0f),
-                                    200 / 255.0f, opacity / 255.0f);
+                auto opacity = static_cast<Uint8>(density[IX(i, j, size)]);
+                auto color = getColorByValue(std::fmod((opacity + 50), 255.0f),
+                                             200 / 255.0f, opacity / 255.0f);
                 if (x >= 0 && x < width && y >= 0 && y < height) {
-                    SDL_Rect rect = {x, y, scale, scale};
+                    SDL_Rect rect{x, y, scale, scale};
                     SDL_FillRect(surface, &rect, color);
                 }
             }

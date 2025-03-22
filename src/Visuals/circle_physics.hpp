@@ -35,23 +35,23 @@ class CirclePhysics {
         this->circleY = y;
     }
 
-    void setVelocity0(Vector1f *Vx0, Vector1f *Vy0) {
-        this->Vx0 = *Vx0;
-        this->Vy0 = *Vy0;
+    void setVelocity(const Vector1f &Vx, const Vector1f &Vy) {
+        this->Vx = Vx;
+        this->Vy = Vy;
     }
 
-    void setVelocity(Vector1f *Vx, Vector1f *Vy) {
-        this->Vx = *Vx;
-        this->Vy = *Vy;
+    void setVelocity0(const Vector1f &Vx0, const Vector1f &Vy0) {
+        this->Vx0 = Vx0;
+        this->Vy0 = Vy0;
     }
 
     void setSurface(SDL_Surface *renderSurface) {
         surface = renderSurface;
-        pixels = static_cast<Uint32 *>(renderSurface->pixels);
+        pixels = reinterpret_cast<Uint32 *>(renderSurface->pixels);
     }
 
-    const Vector2f getVelocity() const { return {Vx, Vy}; }
-    const Vector2f getVelocity0() const { return {Vx0, Vy0}; }
+    Vector2f getVelocity() { return {Vx, Vy}; }
+    Vector2f getVelocity0() { return {Vx0, Vy0}; }
 
     void collision() {
         int startX = std::max(0, circleX - radius);

@@ -28,24 +28,23 @@ void Fluid::setSurface(SDL_Surface *renderSurface) {
 
 void Fluid::setSimulationParams(SimulationParams p) { params = p; }
 
+void Fluid::setNACA_AirfoilProfile(NACA_AirfoilProfile p) { profile = p; }
+
 void Fluid::setMousePos(int x, int y) {
     mouseX = x;
     mouseY = y;
 }
 
 void Fluid::setupNACA(int width, int height, int scale) {
+    nacaAirfoil->setSize(N);
+    nacaAirfoil->setScale(scale);
     nacaAirfoil->setDimensions(500, 200);
-    nacaAirfoil->setProfile(0.02f, 0.12f);
-
-    nacaAirfoil->setVelocity(&Vx, &Vy);
-    nacaAirfoil->setVelocity0(&Vx0, &Vy0);
+    nacaAirfoil->setProfile(profile);
 
     int centerX = (width * 0.1 / scale) + 30;
     int centerY = (height * 0.5 / scale) + 1;
 
     nacaAirfoil->setPosition(centerX, centerY);
-    nacaAirfoil->setSize(N);
-    nacaAirfoil->setScale(scale);
 }
 
 void Fluid::drawNACA() {
@@ -96,8 +95,8 @@ void Fluid::draw() {
 
     switch (params.object) {
     case 0: {
-        circlePhysics->setVelocity(&Vx, &Vy);
-        circlePhysics->setVelocity0(&Vx0, &Vy0);
+        circlePhysics->setVelocity(Vx, Vy);
+        circlePhysics->setVelocity0(Vx0, Vy0);
 
         circlePhysics->collision();
 
@@ -107,8 +106,8 @@ void Fluid::draw() {
         drawCircle();
     } break;
     case 1: {
-        nacaAirfoil->setVelocity(&Vx, &Vy);
-        nacaAirfoil->setVelocity0(&Vx0, &Vy0);
+        nacaAirfoil->setVelocity(Vx, Vy);
+        nacaAirfoil->setVelocity0(Vx0, Vy0);
 
         nacaAirfoil->collision();
 

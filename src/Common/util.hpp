@@ -88,3 +88,9 @@ struct SimulationParams {
     int object;
     bool enableMouse;
 };
+
+struct NACA_AirfoilProfile {
+    float camber;
+    float maxCamber;
+    float thickness;
+};

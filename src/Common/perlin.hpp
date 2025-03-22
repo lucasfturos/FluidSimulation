@@ -20,6 +20,7 @@ inline int randomInt(int min, int max) {
 }
 
 using point2 = std::array<double, 2>;
+using array2x2x2 = std::array<std::array<std::array<double, 2>, 2>, 2>;
 
 inline double dot(const point2 &u, const point2 &v) {
     return u[0] * v[0] + u[1] * v[1];
@@ -50,7 +51,7 @@ class Perlin {
 
         auto i = static_cast<int>(std::floor(p[0]));
         auto j = static_cast<int>(std::floor(p[1]));
-        std::array<std::array<point2, 2>, 2> c;
+        array2x2x2 c;
 
         for (int di = 0; di < 2; ++di) {
             for (int dj = 0; dj < 2; ++dj) {
@@ -101,8 +102,7 @@ class Perlin {
         }
     }
 
-    static double perlinInterp(const std::array<std::array<point2, 2>, 2> &c,
-                               double u, double v) {
+    static double perlinInterp(const array2x2x2 &c, double u, double v) {
         auto uu = u * u * (3 - 2 * u);
         auto vv = v * v * (3 - 2 * v);
         auto accum = 0.0;
