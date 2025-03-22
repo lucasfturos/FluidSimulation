@@ -2406,7 +2406,8 @@ src/CMakeFiles/Fluid.dir/Fluid/fluid.cpp.o: /home/runner/work/FluidSimulation/Fl
   /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Fluid/logic.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/logic.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -3325,7 +3326,8 @@ src/CMakeFiles/Fluid.dir/Fluid/logic.cpp.o: /home/runner/work/FluidSimulation/Fl
   /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Fluid/util.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/util.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -4244,7 +4246,8 @@ src/CMakeFiles/Fluid.dir/Fluid/util.cpp.o: /home/runner/work/FluidSimulation/Flu
   /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/draw.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Render/draw.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -5184,7 +5187,8 @@ src/CMakeFiles/Fluid.dir/Render/draw.cpp.o: /home/runner/work/FluidSimulation/Fl
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/event.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Render/event.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -6124,7 +6128,8 @@ src/CMakeFiles/Fluid.dir/Render/event.cpp.o: /home/runner/work/FluidSimulation/F
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/render.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -7064,7 +7069,8 @@ src/CMakeFiles/Fluid.dir/Render/render.cpp.o: /home/runner/work/FluidSimulation/
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/setup.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/Render/setup.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -8004,7 +8010,8 @@ src/CMakeFiles/Fluid.dir/Render/setup.cpp.o: /home/runner/work/FluidSimulation/F
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/main.cpp.o: /home/runner/work/FluidSimulation/FluidSimulation/src/main.cpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL.h \
@@ -8945,7 +8952,8 @@ src/CMakeFiles/Fluid.dir/main.cpp.o: /home/runner/work/FluidSimulation/FluidSimu
   /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 
 /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp:
@@ -10145,6 +10153,8 @@ src/CMakeFiles/Fluid.dir/main.cpp.o: /home/runner/work/FluidSimulation/FluidSimu
 /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/errno.h:
 
 /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/data.h:
+
+/home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp:
 
 /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/__iterator/default_sentinel.h:
 
