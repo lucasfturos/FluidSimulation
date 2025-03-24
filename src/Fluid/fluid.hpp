@@ -4,7 +4,7 @@
 #include "Common/util.hpp"
 
 #include "Visuals/circle_physics.hpp"
-#include "Visuals/density.hpp"
+#include "Visuals/density_drawer.hpp"
 #include "Visuals/naca_airfoil.hpp"
 
 #include <SDL2/SDL.h>
