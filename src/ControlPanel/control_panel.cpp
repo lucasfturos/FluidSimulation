@@ -1,7 +1,7 @@
 #include "control_panel.hpp"
 
 ControlPanel::ControlPanel()
-    : params({16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 1, false}),
+    : params({3, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false}),
       profile({2.0f, 50.0f, 12.0f}) {}
 
 SimulationParams ControlPanel::getSimulationParams() { return params; }
@@ -37,7 +37,7 @@ void ControlPanel::mainWindow() {
     ImGui::PopItemWidth();
 
     if (ImGui::Button("Reset")) {
-        params = {16, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false};
+        params = {3, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false};
     }
 
     ImGui::Separator();
