@@ -14,7 +14,7 @@ class NACA_Airfoil {
     Uint32 color;
 
     int width, height;
-    int centerX, centerY, gridSize;
+    int positionX, positionY, gridSize;
     int airfoilWidth, airfoilHeight;
     int size, scale;
 
@@ -45,19 +45,19 @@ class NACA_Airfoil {
 
   public:
     NACA_Airfoil()
-        : surface(nullptr), pixels(nullptr), width(0), height(0), centerX(0),
-          centerY(0), gridSize(0), airfoilWidth(100), airfoilHeight(20),
+        : surface(nullptr), pixels(nullptr), width(0), height(0), positionX(0),
+          positionY(0), gridSize(0), airfoilWidth(100), airfoilHeight(20),
           friction(1.0f) {}
 
     void setSize(int size) { this->size = size; }
-    void setGridSize(int size) { this->gridSize = size; }
     void setScale(int scale) { this->scale = scale; }
     void setColor(Uint32 color) { this->color = color; }
+    void setGridSize(int size) { this->gridSize = size; }
     void setFriction(float friction) { this->friction = friction; }
 
     void setPosition(int x, int y) {
-        centerX = x;
-        centerY = y;
+        positionX = x;
+        positionY = y;
     }
 
     void setDimensions(int w, int h) {
@@ -65,12 +65,6 @@ class NACA_Airfoil {
         airfoilHeight = h;
     }
 
-    /*  Defines the NACA airfoil profile.
-     * The parameters should be passed as:
-     * `camber`: maximum curvature (in percentage, 0 to 9.5)
-     * `maxCamber`: position of maximum camber (in percentage, 0 to 90)
-     * `thickness`: maximum thickness (in percentage, 1 to 40)
-     */
     void setProfile(NACA_AirfoilProfile profile) {
         this->camber = profile.camber / 100.0f;
         this->maxCamber = profile.maxCamber / 100.0f;
@@ -100,8 +94,8 @@ class NACA_Airfoil {
     void collision() {}
 
     void draw() {
-        int cx = centerX * scale;
-        int cy = centerY * scale;
+        int cx = positionX * scale;
+        int cy = positionY * scale;
 
         for (int x = 0; x <= airfoilWidth; ++x) {
             if (x < 0 || x >= width)

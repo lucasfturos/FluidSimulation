@@ -11,7 +11,7 @@ class ControlPanel {
     const int heightProfile = 130;
     const int flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
 
-    const std::vector<const char *> objects = {"Circle", "NACA"};
+    const std::vector<const char *> objects = {"Circle", "NACA Airfoil"};
 
   private:
     float bottomMainHeight;
