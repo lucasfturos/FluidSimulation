@@ -1,6 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #000;
+    background: linear-gradient(
+        180deg,
+        #000,
+        #0d0d33,
+        #1a1a4d,
+        #3b3b8c,
+        #4d1a1a
+    );
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,13 +24,28 @@ body {
 canvas {
     border: 2px solid #444;
     background-color: transparent;
-    width: 80vw;
+    width: 90vw;
     height: 80vh;
     max-width: 1080px;
     max-height: 720px;
+    position: relative;
+    z-index: 1;
 }
 
 #status {
     margin-top: 20px;
     color: #555;
+}
+
+/* Credits https://gist.github.com/SH20RAJ/48a8733e755b59c16ae32b5d00614564 */
+
+.stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png")
+        repeat top center;
+    z-index: 0;
 }

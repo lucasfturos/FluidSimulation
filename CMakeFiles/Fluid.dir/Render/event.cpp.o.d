@@ -832,7 +832,7 @@ src/CMakeFiles/Fluid.dir/Render/event.cpp.o: \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_error.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_rwops.h \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/SDL2/SDL_blendmode.h \
-  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp \
+  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/iostream \
   /home/runner/work/FluidSimulation/FluidSimulation/external/emsdk/upstream/emscripten/cache/sysroot/include/c++/v1/istream \
