@@ -1,66 +1,65 @@
 name: Deploy Fluid Simulation Site
 
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 env:
-  BUILD_TYPE: Debug
+    BUILD_TYPE: Debug
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Update packages list
-        run: sudo apt update
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Update packages list
+              run: sudo apt update
 
-      - name: Install dependencies (g++, CMake, Make, Doxygen)
-        run: >
-          sudo apt install -y 
-          g++ 
-          cmake 
-          make 
-          doxygen 
+            - name: Install dependencies (g++, CMake, Make, Doxygen)
+              run: >
+                  sudo apt install -y 
+                  g++ 
+                  cmake 
+                  make 
+                  doxygen
 
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
+            - uses: actions/checkout@v3
+              with:
+                  submodules: true
 
-      - name: Cache Emscripten
-        uses: actions/cache@v3
-        with:
-          path: external/emsdk
-          key: emscripten-${{ runner.os }}-${{ hashFiles('external/emsdk/emsdk') }}
-          restore-keys: emscripten-${{ runner.os }}-
+            - name: Cache Emscripten
+              uses: actions/cache@v3
+              with:
+                  path: external/emsdk
+                  key: emscripten-${{ runner.os }}-${{ hashFiles('external/emsdk/emsdk') }}
+                  restore-keys: emscripten-${{ runner.os }}-
 
-      - name: Install Emscripten
-        run: |
-          cd external/emsdk
-          ./emsdk install latest
-          ./emsdk activate latest
-          echo "EMSCRIPTEN_PATH=$(pwd)/upstream/emscripten" >> $GITHUB_ENV
-          echo "$(pwd)/upstream/emscripten" >> $GITHUB_PATH
+            - name: Install Emscripten
+              run: |
+                  cd external/emsdk
+                  ./emsdk install latest
+                  ./emsdk activate latest
+                  echo "EMSCRIPTEN_PATH=$(pwd)/upstream/emscripten" >> $GITHUB_ENV
+                  echo "$(pwd)/upstream/emscripten" >> $GITHUB_PATH
 
-      - name: Test Emscripten
-        run: emcc -v
+            - name: Test Emscripten
+              run: emcc -v
 
-      - name: Cache CMake Build
-        uses: actions/cache@v3
-        with:
-          path: build_site
-          key: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-${{ github.sha }}
-          restore-keys: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-
+            - name: Cache CMake Build
+              uses: actions/cache@v3
+              with:
+                  path: build_site
+                  key: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-${{ github.sha }}
+                  restore-keys: build-${{ runner.os }}-${{ env.BUILD_TYPE }}-
 
-      - name: Configure CMake
-        run: emcmake cmake -S . -B ${{github.workspace}}/build_site -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXE_LINKER_FLAGS="-sUSE_SDL=2"
+            - name: Configure CMake
+              run: emcmake cmake -S . -B ${{github.workspace}}/build_site -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXE_LINKER_FLAGS="-sUSE_SDL=2"
 
-      - name: Build
-        run: cmake --build ${{github.workspace}}/build_site --config ${{env.BUILD_TYPE}}
+            - name: Build
+              run: cmake --build ${{github.workspace}}/build_site --config ${{env.BUILD_TYPE}}
 
-      - name: Deploy Site
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{github.workspace}}/build_site/src
-          clean: true
+            - name: Deploy Site
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ${{github.workspace}}/build_site/src
