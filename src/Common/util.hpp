@@ -3,7 +3,6 @@
 #include <SDL2/SDL_stdinc.h>
 #include <algorithm>
 #include <cmath>
-#include <limits>
 #include <vector>
 
 // Constants
@@ -85,6 +84,7 @@ struct SimulationParams {
     float diffusion;
     float viscosity;
     float dt;
+    float fadeRate;
     int object;
     bool enableMouse;
 };

@@ -19,20 +19,28 @@ void Fluid::setup() {
 
 void Fluid::setSurface(SDL_Surface *renderSurface) {
     surface = renderSurface;
-    pixels = static_cast<Uint32 *>(renderSurface->pixels);
+    pixels = reinterpret_cast<Uint32 *>(renderSurface->pixels);
 
     nacaAirfoil->setSurface(surface);
     circlePhysics->setSurface(surface);
     densityDrawer->setSurface(surface);
 }
 
-void Fluid::setSimulationParams(SimulationParams p) { params = p; }
-
-void Fluid::setNACA_AirfoilProfile(NACA_AirfoilProfile p) { profile = p; }
-
 void Fluid::setMousePos(int x, int y) {
     mouseX = x;
     mouseY = y;
+}
+
+void Fluid::setupCircle(int width, int height, int scale) {
+    circlePhysics->setSize(N);
+    circlePhysics->setScale(scale);
+
+    int radius = 10;
+    circlePhysics->setRadius(radius);
+
+    int positionX = (width * 0.1 / scale) + 30;
+    int positionY = (height * 0.5 / scale) + 1;
+    circlePhysics->setPosition(positionX, positionY);
 }
 
 void Fluid::setupNACA(int width, int height, int scale) {
@@ -51,18 +59,6 @@ void Fluid::drawNACA() {
     auto fillColor = SDL_MapRGB(surface->format, 255, 0, 0);
     nacaAirfoil->setColor(fillColor);
     nacaAirfoil->draw();
-}
-
-void Fluid::setupCircle(int width, int height, int scale) {
-    circlePhysics->setSize(N);
-    circlePhysics->setScale(scale);
-
-    int radius = 10;
-    circlePhysics->setRadius(radius);
-
-    int positionX = (width * 0.1 / scale) + 30;
-    int positionY = (height * 0.5 / scale) + 1;
-    circlePhysics->setPosition(positionX, positionY);
 }
 
 void Fluid::drawCircle() {

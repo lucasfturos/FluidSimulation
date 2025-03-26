@@ -90,7 +90,8 @@ void Fluid::applyRandomInteraction(int width, int height, int scale, float &t) {
 }
 
 void Fluid::fadeDensity() {
+    float fadeRate = params.fadeRate;
     for (std::size_t i = 0; i < density.size(); ++i) {
-        density[i] = std::max(density[i] - 0.02f, 0.0f);
+        density[i] = std::max(density[i] - fadeRate, 0.0f);
     }
 }

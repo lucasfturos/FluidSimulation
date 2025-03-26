@@ -7,16 +7,9 @@
 #include "Visuals/density_drawer.hpp"
 #include "Visuals/naca_airfoil.hpp"
 
-#include <SDL2/SDL.h>
-#include <algorithm>
-#include <fstream>
-#include <functional>
-#include <memory>
-#include <vector>
-
 class Fluid {
   protected:
-    const int N = 270;
+    const int N = 200;
     const int nSize = N * N;
 
   private:
@@ -72,8 +65,9 @@ class Fluid {
 
     void setMousePos(int, int);
     void setSurface(SDL_Surface *);
-    void setSimulationParams(SimulationParams);
-    void setNACA_AirfoilProfile(NACA_AirfoilProfile);
+
+    void setSimulationParams(SimulationParams p) { params = p; }
+    void setNACA_AirfoilProfile(NACA_AirfoilProfile p) { profile = p; }
 
     void setup();
     void draw();

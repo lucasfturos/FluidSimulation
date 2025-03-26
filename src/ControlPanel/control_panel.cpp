@@ -1,8 +1,6 @@
 #include "control_panel.hpp"
 
-ControlPanel::ControlPanel()
-    : params({3, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false}),
-      profile({2.0f, 50.0f, 12.0f}) {}
+ControlPanel::ControlPanel() : params(defaultParams), profile(defaultProfile) {}
 
 SimulationParams ControlPanel::getSimulationParams() { return params; }
 
@@ -32,13 +30,14 @@ void ControlPanel::mainWindow() {
     ImGui::InputFloat("Diffusion", &params.diffusion, 0.0f, 0.0f, "%.1e");
     ImGui::InputFloat("Viscosity", &params.viscosity, 0.0f, 0.0f, "%.1e");
     ImGui::InputFloat("dt", &params.dt, 0.0f, 0.0f, "%.1e");
-    ImGui::Checkbox("Mouse Interaction", &params.enableMouse);
+    ImGui::InputFloat("Fade Rate", &params.fadeRate, 0.0f, 0.0f, "%.1e");
     ImGui::Combo("Objects", &params.object, objects.data(), objects.size());
-    ImGui::PopItemWidth();
-
+    ImGui::Checkbox("Mouse Interaction", &params.enableMouse);
+    ImGui::SameLine();
     if (ImGui::Button("Reset")) {
-        params = {3, 10, 1.0e-6f, 1.0e-6f, 1.0e-1f, 0, false};
+        params = defaultParams;
     }
+    ImGui::PopItemWidth();
 
     ImGui::Separator();
 
@@ -69,6 +68,10 @@ void ControlPanel::nacaWindow() {
                         : (profile.thickness > 40.0f) ? 40.0f
                                                       : profile.thickness;
     ImGui::PopItemWidth();
+
+    if (ImGui::Button("Reset")) {
+        profile = defaultProfile;
+    }
 
     ImGui::Separator();
 
