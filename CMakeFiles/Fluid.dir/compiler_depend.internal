@@ -2410,7 +2410,7 @@ src/CMakeFiles/Fluid.dir/Fluid/fluid.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Fluid/logic.cpp.o
@@ -3332,7 +3332,7 @@ src/CMakeFiles/Fluid.dir/Fluid/logic.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Fluid/util.cpp.o
@@ -4254,7 +4254,7 @@ src/CMakeFiles/Fluid.dir/Fluid/util.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Common/util.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/draw.cpp.o
@@ -5197,7 +5197,7 @@ src/CMakeFiles/Fluid.dir/Render/draw.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/event.cpp.o
@@ -6140,7 +6140,7 @@ src/CMakeFiles/Fluid.dir/Render/event.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/render.cpp.o
@@ -7083,7 +7083,7 @@ src/CMakeFiles/Fluid.dir/Render/render.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/Render/setup.cpp.o
@@ -8026,7 +8026,7 @@ src/CMakeFiles/Fluid.dir/Render/setup.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
 src/CMakeFiles/Fluid.dir/main.cpp.o
@@ -8969,6 +8969,6 @@ src/CMakeFiles/Fluid.dir/main.cpp.o
  /home/runner/work/FluidSimulation/FluidSimulation/src/Fluid/fluid.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Render/render.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/circle_physics.hpp
- /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density.hpp
+ /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/density_drawer.hpp
  /home/runner/work/FluidSimulation/FluidSimulation/src/Visuals/naca_airfoil.hpp
 
