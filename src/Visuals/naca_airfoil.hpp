@@ -3,8 +3,6 @@
 #include "Common/util.hpp"
 
 #include <SDL_surface.h>
-#include <iostream>
-#include <stdexcept>
 
 class NACA_Airfoil {
   private:
@@ -25,22 +23,20 @@ class NACA_Airfoil {
     Vector1f Vx, Vy;
     Vector1f Vx0, Vy0;
 
-    float calculateCamber(float xNorm) {
-        if (xNorm < maxCamber) {
+    float calculateCamber(float x) {
+        if (x < maxCamber) {
             return (camber / (maxCamber * maxCamber)) *
-                   (2 * maxCamber * xNorm - xNorm * xNorm);
+                   (2 * maxCamber * x - x * x);
         } else {
             return (camber / ((1 - maxCamber) * (1 - maxCamber))) *
-                   ((1 - 2 * maxCamber) + 2 * maxCamber * xNorm -
-                    xNorm * xNorm);
+                   ((1 - 2 * maxCamber) + 2 * maxCamber * x - x * x);
         }
     }
 
-    float calculateThickness(float xNorm) {
+    float calculateThickness(float x) {
         return (thickness / 0.2f) *
-               (0.2969f * std::sqrt(xNorm) - 0.1260f * xNorm -
-                0.3516f * xNorm * xNorm + 0.2843f * xNorm * xNorm * xNorm -
-                0.1015f * xNorm * xNorm * xNorm * xNorm);
+               (0.2969f * std::sqrt(x) - 0.1260f * x - 0.3516f * x * x +
+                0.2843f * x * x * x - 0.1015f * x * x * x * x);
     }
 
   public:
@@ -91,7 +87,52 @@ class NACA_Airfoil {
     Vector2f getVelocity() { return {Vx, Vy}; }
     Vector2f getVelocity0() { return {Vx0, Vy0}; }
 
-    void collision() {}
+    void collision() {
+        for (int x = 0; x <= airfoilWidth; ++x) {
+            if (x < 0 || x >= width)
+                continue;
+
+            float xNorm = static_cast<float>(x) / airfoilWidth;
+
+            float yc = calculateCamber(xNorm);
+            float yt = calculateThickness(xNorm);
+
+            float yUpper = yc + yt;
+            float yLower = yc - yt;
+
+            int upperY = static_cast<int>(positionY - airfoilHeight * yUpper);
+            int lowerY = static_cast<int>(positionY - airfoilHeight * yLower);
+
+            for (int y = upperY; y <= lowerY; ++y) {
+                if (y < 0 || y >= height)
+                    continue;
+
+                int index = IX(x, y, gridSize);
+
+                int dx = x - positionX;
+                int dy = y - positionY;
+
+                float length = std::sqrt(dx * dx + dy * dy);
+                if (length > 0.0f) {
+                    float nx = dx / length;
+                    float ny = dy / length;
+
+                    float dot = Vx[index] * nx + Vy[index] * ny;
+                    float tx = Vx[index] - dot * nx;
+                    float ty = Vy[index] - dot * ny;
+
+                    tx *= friction;
+                    ty *= friction;
+
+                    Vx[index] = Vx0[index] = tx;
+                    Vy[index] = Vy0[index] = ty;
+                } else {
+                    Vx[index] = Vy[index] = 0.0f;
+                    Vx0[index] = Vy0[index] = 0.0f;
+                }
+            }
+        }
+    }
 
     void draw() {
         int cx = positionX * scale;
