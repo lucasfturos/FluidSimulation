@@ -20,7 +20,7 @@ class ControlPanel {
         .viscosity = 1.0e-6f,
         .dt = 1.0e-1f,
         .fadeRate = 0.02,
-        .object = 1,
+        .object = 0,
         .enableMouse = false,
     };
     const NACA_AirfoilProfile defaultProfile{
